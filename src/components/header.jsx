@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import { AppContext } from "@/context/app-context";
+import { AppContext } from "../context/app-context";
 import secureLocalStorage from "react-secure-storage";
 import { googleLogout } from "@react-oauth/google";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import PrimaryButton from "./primary-button";
 
 export default function Header() {
   const {
@@ -13,7 +14,6 @@ export default function Header() {
     cart,
     cartLength,
   } = useContext(AppContext);
-  const pathname = usePathname();
   const navItems = [
     {
       name: "Home",
@@ -23,10 +23,22 @@ export default function Header() {
       name: "About Us",
       navTo: "/about-us",
     },
+    {
+      name: "Plans",
+      navTo: "/plans",
+    },
+    {
+      name: "FAQs",
+      navTo: "/faqs",
+    },
+    {
+      name: "Contact Us",
+      navTo: "/contact-us",
+    },
   ];
 
-  const router = useRouter();
-
+  const navigate = useNavigate();
+  const location = useLocation();
   const [open, setopen] = useState(false);
 
   function toggleMenu() {
@@ -36,22 +48,22 @@ export default function Header() {
   async function logout() {
     secureLocalStorage.clear();
     setUserData(null);
-    router.push("/");
+    navigate("/");
     googleLogout();
   }
   return (
     <div className="fixed w-full flex items-center justify-center top-0 right-0 z-40">
       <div className="h-[80px] px-4 lg:px-40 w-full bg-gray-100 shadow-lg flex items-center justify-between lg:bg-opacity-80 lg:backdrop-blur-lg">
         <img
-          src="/custom-jerseys-logo.png"
-          alt="Custom jerseys kenya logo"
-          className="cursor-pointer w-[100px] object-contain hover:scale-[1.05] transition-transform duration-300"
-          onClick={() => router.push("/")}
+          src="/crypto-stan-logo.png"
+          alt="Crypto stan logo"
+          className="cursor-pointer w-[60px] h-[60px] object-contain hover:scale-[1.05] transition-transform duration-300"
+          onClick={() => navigate("/")}
         />
 
         <div className="hidden lmd:hidden lg:flex gap-6">
           {navItems.map((item) => {
-            const isActive = pathname === item.navTo;
+            const isActive = location.pathname === item.navTo;
             const linkStyles = isActive
               ? "font-black text-myDark"
               : "text-gray-700 font-semibold hover:font-bold transition-font";
@@ -68,14 +80,7 @@ export default function Header() {
 
         {!open ? (
           <div className="flex items-center gap-2">
-            <button
-              onClick={userClick}
-              className="hidden w-[50px] h-[50px] rounded-full hover:bg-gray-200 lmd:hidden lg:flex items-center justify-center hover:scale-[1.05] transition-transform duration-300"
-            >
-              <svg viewBox="0 0 24 24" fill="currentColor" className="w-[40px]">
-                <path d="M12 2C6.579 2 2 6.579 2 12s4.579 10 10 10 10-4.579 10-10S17.421 2 12 2zm0 5c1.727 0 3 1.272 3 3s-1.273 3-3 3c-1.726 0-3-1.272-3-3s1.274-3 3-3zm-5.106 9.772c.897-1.32 2.393-2.2 4.106-2.2h2c1.714 0 3.209.88 4.106 2.2C15.828 18.14 14.015 19 12 19s-3.828-.86-5.106-2.228z" />
-              </svg>
-            </button>
+            <PrimaryButton className="w-[140px] font-bold">Login</PrimaryButton>
 
             <svg
               onClick={toggleMenu}
@@ -111,7 +116,7 @@ export default function Header() {
               <div className="w-full p-6 gap-4 bg-gray-100 h-screen">
                 <div className="flex flex-col gap-6">
                   {navItems.map((item) => {
-                    const isActive = pathname === item.navTo;
+                    const isActive = location.pathname === item.navTo;
                     const linkStyles = isActive
                       ? "underline font-black text-myDark"
                       : "text-gray-700 font-semibold hover:font-bold transition-font ";
