@@ -8,6 +8,7 @@ import PrivacyPolicy from "./pages/privacy-policy";
 import ResetPassword from "./pages/reset-password";
 import Home from "./pages/home";
 import Signup from "./pages/signup";
+import FAQs from "./pages/faqs";
 
 function App() {
   const appRouter = createBrowserRouter([
@@ -34,6 +35,10 @@ function App() {
     {
       path: "privacy-policy",
       element: <PrivacyPolicy />,
+    },
+    {
+      path: "faqs",
+      element: <FAQs />,
     },
   ]);
 

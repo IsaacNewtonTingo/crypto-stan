@@ -55,9 +55,9 @@ export default function Header() {
     <div className="fixed w-full flex items-center justify-center top-0 right-0 z-40">
       <div className="h-[80px] px-4 lg:px-40 w-full bg-gray-100 shadow-lg flex items-center justify-between lg:bg-opacity-80 lg:backdrop-blur-lg">
         <img
-          src="/crypto-stan-logo.png"
-          alt="Crypto stan logo"
-          className="cursor-pointer w-[60px] h-[60px] object-contain hover:scale-[1.05] transition-transform duration-300"
+          src="/fx-nest-logo.png"
+          alt="FX nest logo"
+          className="cursor-pointer w-[150px]  object-contain hover:scale-[1.05] transition-transform duration-300"
           onClick={() => navigate("/")}
         />
 
@@ -81,6 +81,9 @@ export default function Header() {
         {!open ? (
           <div className="flex items-center gap-2">
             <PrimaryButton className="w-[140px] font-bold">Login</PrimaryButton>
+            <PrimaryButton className="w-[140px] font-bold bg-transparent border-2 border-primary-900 text-primary-900 hover:bg-primary-50">
+              Register
+            </PrimaryButton>
 
             <svg
               onClick={toggleMenu}

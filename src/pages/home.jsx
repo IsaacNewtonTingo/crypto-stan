@@ -161,8 +161,8 @@ export default function Home() {
       benefits: [
         "Min. Possible deposit: $300",
         "Max. Possible deposit: $9999",
-        "Minimum return 500 %",
-        "Maximum return 5000 %",
+        "Minimum return 500%",
+        "Maximum return 5000%",
         "$60 Gift Bonus",
       ],
     },
@@ -173,8 +173,8 @@ export default function Home() {
       benefits: [
         "Min. Possible deposit: $100",
         "Max. Possible deposit: $4999",
-        "Minimum return 50 %",
-        "Maximum return 1000 %",
+        "Minimum return 50%",
+        "Maximum return 1000%",
         "$42 Gift Bonus",
       ],
     },
@@ -197,7 +197,7 @@ export default function Home() {
       benefits: [
         "Min. Possible deposit: $10",
         "Max. Possible deposit: $99",
-        "Minimum return 5 %",
+        "Minimum return 5%",
         "Maximum return 98%",
         "$6 Gift Bonus",
       ],
