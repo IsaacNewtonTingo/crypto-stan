@@ -12,6 +12,13 @@ import FAQs from "./pages/faqs";
 import AboutUs from "./pages/about-us";
 import Plans from "./pages/plans";
 import ContactUs from "./pages/contact-us";
+import Dashboard from "./pages/dashboard/dashboard";
+import DashboardContainer from "./components/dashboard/container";
+import Deposit from "./pages/dashboard/deposit";
+import Withdraw from "./pages/dashboard/withdraw";
+import Transactions from "./pages/dashboard/transactions";
+import Referrals from "./pages/dashboard/referrals";
+import MyPlan from "./pages/dashboard/my-plan";
 
 function App() {
   const appRouter = createBrowserRouter([
@@ -54,6 +61,32 @@ function App() {
     {
       path: "contact-us",
       element: <ContactUs />,
+    },
+    {
+      path: "/dashboard",
+      element: <DashboardContainer />,
+      children: [
+        {
+          path: "deposit",
+          element: <Deposit />,
+        },
+        {
+          path: "withdraw",
+          element: <Withdraw />,
+        },
+        {
+          path: "transactions",
+          element: <Transactions />,
+        },
+        {
+          path: "referrals",
+          element: <Referrals />,
+        },
+        {
+          path: "my-plan",
+          element: <MyPlan />,
+        },
+      ],
     },
   ]);
 
