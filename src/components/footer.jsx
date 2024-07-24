@@ -27,7 +27,7 @@ export default function Footer() {
   const navigate = useNavigate();
 
   return (
-    <div className="bg-gradient-to-r from-gray-900 to-primary-600 px-10 lg:px-40 py-10 lg:py-20">
+    <div className="bg-gradient-to-r from-gray-900 to-primary-900 px-10 lg:px-40 py-10 lg:py-20">
       <div className="w-full flex flex-col lg:flex-row gap-10 justify-between text-gray-400 ">
         <div className="w-1/4">
           <img

@@ -4,6 +4,7 @@ import secureLocalStorage from "react-secure-storage";
 import { googleLogout } from "@react-oauth/google";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import PrimaryButton from "./primary-button";
+import SecondaryButton from "./secondary-button";
 
 export default function Header() {
   const {
@@ -80,11 +81,20 @@ export default function Header() {
 
         {!open ? (
           <div className="flex items-center gap-2">
-            <PrimaryButton className="w-[140px] font-bold">Login</PrimaryButton>
-            <PrimaryButton className="w-[140px] font-bold bg-transparent border-2 border-primary-900 text-primary-900 hover:bg-primary-50">
-              Register
-            </PrimaryButton>
+            <div className="w-[140px]">
+              <PrimaryButton
+                onClick={() => navigate("/login")}
+                className="font-bold"
+              >
+                Login
+              </PrimaryButton>
+            </div>
 
+            <div className="w-[140px]">
+              <SecondaryButton onClick={() => navigate("/signup")} className="">
+                Register
+              </SecondaryButton>
+            </div>
             <svg
               onClick={toggleMenu}
               fill="none"

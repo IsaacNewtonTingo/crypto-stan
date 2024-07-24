@@ -9,6 +9,9 @@ import ResetPassword from "./pages/reset-password";
 import Home from "./pages/home";
 import Signup from "./pages/signup";
 import FAQs from "./pages/faqs";
+import AboutUs from "./pages/about-us";
+import Plans from "./pages/plans";
+import ContactUs from "./pages/contact-us";
 
 function App() {
   const appRouter = createBrowserRouter([
@@ -39,6 +42,18 @@ function App() {
     {
       path: "faqs",
       element: <FAQs />,
+    },
+    {
+      path: "about-us",
+      element: <AboutUs />,
+    },
+    {
+      path: "plans",
+      element: <Plans />,
+    },
+    {
+      path: "contact-us",
+      element: <ContactUs />,
     },
   ]);
 
