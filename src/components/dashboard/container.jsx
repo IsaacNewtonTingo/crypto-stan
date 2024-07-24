@@ -7,12 +7,13 @@ import Dashboard from "../../pages/dashboard/dashboard";
 export default function DashboardContainer({ children }) {
   const location = useLocation();
   return (
-    <div>
+    <div className="bg-gray-900">
       <Header />
 
       <div className="flex justify-between">
         <Sidebar />
-        <div className="w-[75%] ml-auto mt-[70px] p-10">
+
+        <div className="w-[75%] ml-auto mt-[70px] p-10 min-h-screen">
           {location.pathname === "/dashboard" && <Dashboard />}
           <Outlet />
         </div>
