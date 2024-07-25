@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import DashboardContainer from "../../components/dashboard/container";
-import Title from "../../components/title";
-import moment from "moment";
 import OverviewCard from "../../components/overview-card";
+import Title from "../../components/title";
 
-export default function Dashboard() {
+export default function Admin() {
   const [totalBalance, setTotalBalance] = useState(24536.55);
   const [totalDifference, setTotalDifference] = useState(23.84);
   const [totalPercentageDifference, setTotalPercentageDifference] =
@@ -49,13 +47,19 @@ export default function Dashboard() {
       status: 2,
     },
   ];
+  /**
+   * All users
+   * Net amount
+   * Pending withrawals
+   * Pending Deposits
+   * recent transactions
+   */
   return (
     <div>
       <Title className={"text-white"}>Welcome back John Doe</Title>
       <h2 className="text-gray-500">
         Happy to see you again. Get update of your asset today, good luck!!!
       </h2>
-
       <div className="grid grid-cols-1 lg:grid-cols-2 mt-10 gap-4">
         <OverviewCard
           title={"Total Balance"}
@@ -66,67 +70,6 @@ export default function Dashboard() {
             totalPercentageDifference > 0 ? "text-green-400" : "text-red-400"
           }`}
         />
-      </div>
-
-      <h2 className="text-white font-bold mt-10">Transaction History</h2>
-
-      <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-4">
-        <table className="w-full text-sm text-left rtl:text-right text-gray-200">
-          <thead className="text-xs text-gray-100 uppercase bg-primary-900 ">
-            <tr>
-              <th scope="col" className="px-6 py-3">
-                #
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Amount
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Type
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Date
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Status
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {transactions.map((item, index) => (
-              <tr
-                key={item._id}
-                className="odd:bg-gray-900 even:bg-primary-900"
-              >
-                <td className="px-6 py-4">{index + 1}</td>
-                <th
-                  scope="row"
-                  className="px-6 py-4 font-medium text-white whitespace-nowrap "
-                >
-                  ${item.amount}
-                </th>
-                <td className="px-6 py-4">{item.type}</td>
-                <td className="px-6 py-4">
-                  {moment(item.created_at).format("lll")}
-                </td>
-                <td
-                  className={`px-6 py-4 font-bold ${
-                    item.status == 0
-                      ? "text-red-500"
-                      : item.status == 1
-                      ? "text-green-500"
-                      : "text-orange-500"
-                  }`}
-                >
-                  {item.status == 0
-                    ? "Failed"
-                    : item.status == 1
-                    ? "Complete"
-                    : "Pending"}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
       </div>
     </div>
   );

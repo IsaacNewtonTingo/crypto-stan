@@ -19,6 +19,12 @@ import Withdraw from "./pages/dashboard/withdraw";
 import Transactions from "./pages/dashboard/transactions";
 import Referrals from "./pages/dashboard/referrals";
 import MyPlan from "./pages/dashboard/my-plan";
+import AdminLayout from "./layouts/admin-layout";
+import Users from "./pages/admin/users";
+import Deposits from "./pages/admin/deposits";
+import Withdrawals from "./pages/admin/withdrawals";
+import AdminTransactions from "./pages/admin/transactions";
+import AdminReferrals from "./pages/admin/referrals";
 
 function App() {
   const appRouter = createBrowserRouter([
@@ -85,6 +91,32 @@ function App() {
         {
           path: "my-plan",
           element: <MyPlan />,
+        },
+      ],
+    },
+    {
+      path: "/admin",
+      element: <AdminLayout />,
+      children: [
+        {
+          path: "users",
+          element: <Users />,
+        },
+        {
+          path: "deposits",
+          element: <Deposits />,
+        },
+        {
+          path: "withdrawals",
+          element: <Withdrawals />,
+        },
+        {
+          path: "transactions",
+          element: <AdminTransactions />,
+        },
+        {
+          path: "referrals",
+          element: <AdminReferrals />,
         },
       ],
     },
