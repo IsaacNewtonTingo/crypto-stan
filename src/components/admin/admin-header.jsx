@@ -3,9 +3,7 @@ import React from "react";
 export default function AdminHeader() {
   return (
     <div className="h-[80px] w-[75%] bg-gradient-to-r from-gray-900 to-primary-900 shadow-lg fixed right-0 flex items-center justify-between px-10 z-50 gap-10">
-      <div className="w-[25%] flex gap-2 items-center">
-        <h2 className="font-black text-white">ADMIN</h2>
-      </div>
+      <div className="w-[25%] flex gap-2 items-center"></div>
 
       <div className="w-[75%] flex items-center justify-end gap-2">
         <svg
