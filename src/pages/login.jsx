@@ -56,6 +56,7 @@ export default function Login() {
             ...headers,
           },
           body: JSON.stringify(data),
+          credentials: "include",
         });
 
         const responseData = await response.json();

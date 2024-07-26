@@ -25,6 +25,7 @@ import Deposits from "./pages/admin/deposits";
 import Withdrawals from "./pages/admin/withdrawals";
 import AdminTransactions from "./pages/admin/transactions";
 import AdminReferrals from "./pages/admin/referrals";
+import UserDetails from "./pages/admin/user-details";
 
 function App() {
   const appRouter = createBrowserRouter([
@@ -101,6 +102,10 @@ function App() {
         {
           path: "users",
           element: <Users />,
+        },
+        {
+          path: "users/:id",
+          element: <UserDetails />,
         },
         {
           path: "deposits",

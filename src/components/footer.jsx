@@ -139,14 +139,7 @@ export default function Footer() {
       </div>
 
       <p className="text-[12px] text-gray-400 mt-10 lg:mt-20">
-        Copyright © 2024. All Rights Reserved. Custom Jerseys Built By{" "}
-        <a
-          href="https://wa.me/254724753175"
-          target="_blank"
-          className="text-orange-500 font-bold hover:text-blue-400"
-        >
-          Isaac Newton Tingo
-        </a>
+        Copyright © 2024. All Rights Reserved. FX Nest Investors
       </p>
     </div>
   );

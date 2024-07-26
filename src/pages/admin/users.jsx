@@ -1,14 +1,20 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import OverviewCard from "../../components/overview-card";
 import Title from "../../components/title";
 import moment from "moment";
+import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
+import { AppContext } from "../../context/app-context";
+import { Link, useNavigate } from "react-router-dom";
+import EditBalanceModal from "../../components/admin/edit-balance-modal";
 
 export default function Users() {
+  const { userData } = useContext(AppContext);
   const [totalUsers, setTotalUsers] = useState({
-    total: 24,
-    active: 24,
-    difference: 56,
-    percentage: 12,
+    data: [],
+    total: 0,
+    active: 0,
+    inactive: 0,
   });
   const usersIcon = (
     <svg
@@ -32,44 +38,80 @@ export default function Users() {
     </svg>
   );
 
-  const transactions = [
-    {
-      _id: 1,
-      first_name: "King",
-      last_name: "James",
-      amount: "243.99",
-      created_at: "10/10/2012",
-      type: "Deposit",
-      status: 1,
-    },
-    {
-      _id: 2,
-      first_name: "King",
-      last_name: "James",
-      amount: "10.99",
-      created_at: "10/10/2012",
-      type: "Withdrawal",
-      status: 0,
-    },
-    {
-      _id: 3,
-      first_name: "King",
-      last_name: "James",
-      amount: "100.99",
-      created_at: "10/10/2012",
-      type: "Withdrawal",
-      status: 2,
-    },
-  ];
-  /**
-   * All users
-   * Net amount
-   * Pending withrawals
-   * Pending Deposits
-   * recent transactions
-   */
+  const [activeItem, setActiveItem] = useState(null);
+  const [dropdown, setDropdown] = useState(false);
+  const [modal, setModal] = useState(false);
+
+  const [balance, setBalance] = useState(0);
+  const [processing, setProcessing] = useState(0);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (
+      userData &&
+      (userData.roleID == "superAdmin" || userData.roleID == "admin")
+    ) {
+      getUsers();
+    } else {
+      navigate("/login");
+    }
+  }, []);
+
+  async function getUsers() {
+    try {
+      const url = `${process.env.REACT_APP_API_ENDPOINT}/api/user`;
+      const response = await axios.get(url, { withCredentials: true });
+      if (response.data.status == "Success") {
+        setTotalUsers(response.data.data);
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      toast.error("An error occured while getting users");
+    }
+  }
+
+  function toggleDropdown(item) {
+    setActiveItem(item);
+    setDropdown(!dropdown);
+    setBalance(item.accountBalance);
+  }
+
+  function toggleEditModal(item) {
+    setModal(!modal);
+  }
+
+  async function updateBalance(e) {
+    e.preventDefault();
+    try {
+      const url = `${process.env.REACT_APP_API_ENDPOINT}/api/user`;
+      const data = {
+        balance,
+        userID: userData._id,
+        clientID: activeItem._id,
+      };
+      setProcessing(true);
+      const response = await axios.put(url, data, { withCredentials: true });
+      if (response.data.status === "Success") {
+        toast.success(response.data.message);
+        setModal(false);
+        getUsers();
+        setActiveItem(null);
+        setDropdown(false);
+      } else {
+        toast.error(response.data.message);
+      }
+      setProcessing(false);
+    } catch (error) {
+      setProcessing(false);
+      toast.error("An error occured while updating balance");
+    }
+  }
+
   return (
     <div>
+      <Toaster />
       <Title className={"text-white"}>Welcome back John Doe</Title>
       <h2 className="text-gray-500">
         Happy to see you again. Get update of your asset today, good luck!!!
@@ -80,9 +122,7 @@ export default function Users() {
           title={"All Users"}
           content={`${totalUsers.total}`}
           icon={usersIcon}
-          sub={`${totalUsers.difference > 0 ? "+" : "-"}${totalUsers.total}(${
-            totalUsers.percentage
-          }%)`}
+          sub={``}
           subColor={`${
             totalUsers.difference > 0 ? "text-green-400" : "text-red-400"
           }`}
@@ -90,14 +130,14 @@ export default function Users() {
 
         <OverviewCard
           title={"Active Users"}
-          content={`$${totalUsers.active}`}
+          content={`${totalUsers.active}`}
           icon={usersIcon}
           sub={""}
           subColor={`${"text-green-400"}`}
         />
         <OverviewCard
           title={"Inactive Users"}
-          content={`$${totalUsers.active}`}
+          content={`${totalUsers.inactive}`}
           icon={usersIcon}
           sub={""}
           subColor={`${"text-green-400"}`}
@@ -106,8 +146,8 @@ export default function Users() {
 
       <h2 className="text-white font-bold mt-10">All users</h2>
 
-      <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-4">
-        <table className="w-full text-sm text-left rtl:text-right text-gray-200">
+      <div className="overflow-x-auto shadow-md sm:rounded-lg mt-4">
+        <table className="w-full text-sm text-left rtl:text-right text-gray-200 overflow-auto">
           <thead className="text-xs text-gray-100 uppercase bg-primary-900 ">
             <tr>
               <th scope="col" className="px-6 py-3">
@@ -117,59 +157,90 @@ export default function Users() {
                 Name
               </th>
               <th scope="col" className="px-6 py-3">
-                Amount
+                Email
               </th>
               <th scope="col" className="px-6 py-3">
-                Type
+                Account Balance
               </th>
               <th scope="col" className="px-6 py-3">
-                Date
+                Date Joined
               </th>
               <th scope="col" className="px-6 py-3">
-                Status
+                Action
               </th>
             </tr>
           </thead>
-          <tbody>
-            {transactions.map((item, index) => (
+
+          <tbody className="overflow-auto">
+            {totalUsers.data.map((item, index) => (
               <tr
                 key={item._id}
                 className="odd:bg-gray-900 even:bg-primary-900"
               >
                 <td className="px-6 py-4">{index + 1}</td>
                 <td className="px-6 py-4">
-                  {item.first_name} {item.last_name}
+                  {item.firstName} {item.lastName}
                 </td>
                 <th
                   scope="row"
                   className="px-6 py-4 font-medium text-white whitespace-nowrap "
                 >
-                  ${item.amount}
+                  {item.email}
                 </th>
-                <td className="px-6 py-4">{item.type}</td>
+                <td className="px-6 py-4">${item.accountBalance}</td>
                 <td className="px-6 py-4">
-                  {moment(item.created_at).format("lll")}
+                  {moment(item.createdAt).format("lll")}
                 </td>
-                <td
-                  className={`px-6 py-4 font-bold ${
-                    item.status == 0
-                      ? "text-red-500"
-                      : item.status == 1
-                      ? "text-green-500"
-                      : "text-orange-500"
-                  }`}
-                >
-                  {item.status == 0
-                    ? "Failed"
-                    : item.status == 1
-                    ? "Complete"
-                    : "Pending"}
+
+                <td className={`px-6 py-4 font-bold relative`}>
+                  <svg
+                    className="w-[30px] h-[30px] cursor-pointer"
+                    onClick={() => toggleDropdown(item)}
+                  >
+                    <g fill="currentColor" fillRule="evenodd">
+                      <path d="M11.5 10.5 A1 1 0 0 1 10.5 11.5 A1 1 0 0 1 9.5 10.5 A1 1 0 0 1 11.5 10.5 z" />
+                      <path d="M11.5 5.5 A1 1 0 0 1 10.5 6.5 A1 1 0 0 1 9.5 5.5 A1 1 0 0 1 11.5 5.5 z" />
+                      <path d="M11.5 15.5 A1 1 0 0 1 10.5 16.5 A1 1 0 0 1 9.5 15.5 A1 1 0 0 1 11.5 15.5 z" />
+                    </g>
+                  </svg>
+
+                  {dropdown && activeItem._id == item._id && (
+                    <ul className="bg-white rounded-lg text-gray-500">
+                      <button
+                        onClick={() => navigate(`${item._id}`)}
+                        to={`${item._id}`}
+                        className="w-full text-left p-4 hover:bg-gray-100"
+                      >
+                        View Details
+                      </button>
+                      <br />
+
+                      <button
+                        onClick={() => toggleEditModal(item)}
+                        className="w-full text-left p-4 hover:bg-gray-100"
+                      >
+                        Update Balance
+                      </button>
+                    </ul>
+                  )}
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+
+      {modal && (
+        <EditBalanceModal
+          processing={processing}
+          balance={balance}
+          disabled={!balance || processing}
+          setBalance={setBalance}
+          updateBalance={updateBalance}
+          setModal={setModal}
+          user={activeItem}
+        />
+      )}
     </div>
   );
 }
