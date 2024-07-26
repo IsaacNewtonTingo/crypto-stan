@@ -55,7 +55,7 @@ export default function Signup() {
         lastName,
       };
 
-      const url = `${process.env.API_ENDPOINT}/api/user/auth/signup`;
+      const url = `${process.env.REACT_APP_API_ENDPOINT}/api/user/auth/signup`;
       const headers = {
         "auth-token": process.env.TOKEN,
       };
@@ -104,7 +104,7 @@ export default function Signup() {
         verificationCode: code,
       };
 
-      const url = `${process.env.API_ENDPOINT}/api/user/auth/verify-code`;
+      const url = `${process.env.REACT_APP_API_ENDPOINT}/api/user/auth/verify-code`;
       const headers = {
         "auth-token": process.env.TOKEN,
       };
@@ -135,12 +135,11 @@ export default function Signup() {
               secureLocalStorage.setItem("nextRoute", null);
             } else if (
               response.data.roleID === "superAdmin" ||
-              response.data.roleID === "admin" ||
-              response.data.roleID === "shopAdmin"
+              response.data.roleID === "admin"
             ) {
               navigate("/admin");
             } else {
-              navigate("/");
+              navigate("/dashboard");
             }
           } else {
             toast.error(response.data.message);
@@ -242,7 +241,10 @@ export default function Signup() {
 
         <p className="mt-4 text-center text-gray-400">
           Already have an account ?{" "}
-          <Link className="text-myBlue font-bold hover:underline" to={"/login"}>
+          <Link
+            className="text-blue-500 font-bold hover:underline"
+            to={"/login"}
+          >
             Login
           </Link>
         </p>

@@ -11,7 +11,7 @@ export default function TextInput(props) {
       onChange={onChange}
       value={value}
       required={required}
-      className={`appearance-none rounded-lg h-[30px] px-4 border-0 focus:border-[1px] ring-0 focus:outline-none text-gray-700 bg-gray-200 focus:border-gray-300 ${className} `}
+      className={`appearance-none rounded-lg h-[30px] px-4 border-0 focus:border-[1px] ring-0 focus:outline-none text-gray-800 bg-gray-200 focus:border-gray-300 ${className} `}
     />
   );
 }

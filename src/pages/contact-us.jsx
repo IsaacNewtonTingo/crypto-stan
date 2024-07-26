@@ -44,7 +44,7 @@ export default function ContactUs() {
           message,
         };
         const response = await axios.post(
-          `${process.env.API_ENDPOINT}/api/contact-us`,
+          `${process.env.REACT_APP_API_ENDPOINT}/api/contact-us`,
           data,
           { headers }
         );

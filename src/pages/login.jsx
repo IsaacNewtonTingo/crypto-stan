@@ -44,7 +44,7 @@ export default function Login() {
         };
         setprocessing(true);
 
-        const url = `${process.env.API_ENDPOINT}/api/user/auth/login`;
+        const url = `${process.env.REACT_APP_API_ENDPOINT}/api/user/auth/login`;
         const headers = {
           "auth-token": process.env.TOKEN,
         };
@@ -75,12 +75,11 @@ export default function Login() {
             secureLocalStorage.setItem("nextRoute", null);
           } else if (
             responseData.data.roleID === "superAdmin" ||
-            responseData.data.roleID === "admin" ||
-            responseData.data.roleID === "shopAdmin"
+            responseData.data.roleID === "admin"
           ) {
             navigate("/admin");
           } else {
-            navigate("/");
+            navigate("/dashboard");
           }
         } else {
           toast.error(responseData.message);
@@ -125,7 +124,7 @@ export default function Login() {
             "auth-token": process.env.TOKEN,
           };
           const apiRes = await axios.post(
-            `${process.env.API_ENDPOINT}/api/user/auth/google-login`,
+            `${process.env.REACT_APP_API_ENDPOINT}/api/user/auth/google-login`,
             googleData,
             { headers }
           );
@@ -225,7 +224,7 @@ export default function Login() {
           <p className="mt-4 text-center text-gray-400">
             Forgot password ?{" "}
             <Link
-              className="text-myBlue font-bold hover:underline"
+              className="text-blue-500 font-bold hover:underline"
               href={"/forgot-password"}
             >
               Reset
@@ -237,7 +236,7 @@ export default function Login() {
           </PrimaryButton>
         </form>
 
-        <div className="flex items-center justify-center mt-4 gap-4">
+        {/* <div className="flex items-center justify-center mt-4 gap-4">
           <hr
             style={{ width: "100%", height: "1px", backgroundColor: "black" }}
           />
@@ -257,12 +256,12 @@ export default function Login() {
             className="w-[30px] h-[30px]"
           />
           <span className="text-myBlue">Login with Google</span>
-        </button>
+        </button> */}
 
         <p className="mt-4 text-center text-gray-400">
           Don't have an account ?{" "}
           <Link
-            className="text-myBlue font-bold hover:underline"
+            className="text-blue-500 font-bold hover:underline"
             to={"/signup"}
           >
             Sigup

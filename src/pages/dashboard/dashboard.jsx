@@ -1,14 +1,19 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import DashboardContainer from "../../components/dashboard/container";
 import Title from "../../components/title";
 import moment from "moment";
 import OverviewCard from "../../components/overview-card";
+import { AppContext } from "../../context/app-context";
+import { useNavigate } from "react-router-dom";
 
 export default function Dashboard() {
+  const { userData } = useContext(AppContext);
   const [totalBalance, setTotalBalance] = useState(24536.55);
   const [totalDifference, setTotalDifference] = useState(23.84);
   const [totalPercentageDifference, setTotalPercentageDifference] =
     useState(10);
+
+  const navigate = useNavigate();
 
   const balanceIcon = (
     <svg
@@ -49,6 +54,12 @@ export default function Dashboard() {
       status: 2,
     },
   ];
+
+  useEffect(() => {
+    if (!userData) {
+      navigate("/login");
+    }
+  }, []);
   return (
     <div>
       <Title className={"text-white"}>Welcome back John Doe</Title>
