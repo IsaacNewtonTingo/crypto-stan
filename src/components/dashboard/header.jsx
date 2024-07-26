@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AppContext } from "../../context/app-context";
 
 export default function Header() {
+  const { userData } = useContext(AppContext);
   return (
     <div className="h-[80px] w-[75%] bg-gradient-to-r from-gray-900 to-primary-900 shadow-lg fixed right-0 flex items-center justify-between px-10 z-50 gap-10">
       <div className="w-[25%] flex gap-2 items-center">
@@ -14,7 +16,9 @@ export default function Header() {
 
         <div className="">
           <p className="text-gray-400">Balance</p>
-          <p className="text-green-400 font-black">USD. 245.99</p>
+          <p className="text-green-400 font-black">
+            USD. {userData.accountBalance}
+          </p>
         </div>
       </div>
 

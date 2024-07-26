@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import OverviewCard from "../../components/overview-card";
 import Title from "../../components/title";
 import moment from "moment";
@@ -45,6 +45,7 @@ export default function Users() {
   const [balance, setBalance] = useState(0);
   const [processing, setProcessing] = useState(0);
 
+  const dropdownRef = useRef(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -56,6 +57,11 @@ export default function Users() {
     } else {
       navigate("/login");
     }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, []);
 
   async function getUsers() {
@@ -108,6 +114,12 @@ export default function Users() {
       toast.error("An error occured while updating balance");
     }
   }
+
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setDropdown(false);
+    }
+  };
 
   return (
     <div>
@@ -205,7 +217,10 @@ export default function Users() {
                   </svg>
 
                   {dropdown && activeItem._id == item._id && (
-                    <ul className="bg-white rounded-lg text-gray-500">
+                    <ul
+                      ref={dropdownRef}
+                      className="bg-white rounded-lg text-gray-500"
+                    >
                       <button
                         onClick={() => navigate(`${item._id}`)}
                         to={`${item._id}`}

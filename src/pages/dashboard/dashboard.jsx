@@ -9,9 +9,6 @@ import { useNavigate } from "react-router-dom";
 export default function Dashboard() {
   const { userData } = useContext(AppContext);
   const [totalBalance, setTotalBalance] = useState(24536.55);
-  const [totalDifference, setTotalDifference] = useState(23.84);
-  const [totalPercentageDifference, setTotalPercentageDifference] =
-    useState(10);
 
   const navigate = useNavigate();
 
@@ -70,12 +67,17 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-2 mt-10 gap-4">
         <OverviewCard
           title={"Total Balance"}
-          content={`USD. ${totalBalance}`}
+          content={`USD. ${userData.accountBalance}`}
           icon={balanceIcon}
-          sub={`${totalDifference}(${totalPercentageDifference}%)`}
-          subColor={`${
-            totalPercentageDifference > 0 ? "text-green-400" : "text-red-400"
-          }`}
+          sub={``}
+          subColor={``}
+        />
+        <OverviewCard
+          title={"Total Transactions"}
+          content={`USD. ${userData.accountBalance}`}
+          icon={balanceIcon}
+          sub={``}
+          subColor={``}
         />
       </div>
 
