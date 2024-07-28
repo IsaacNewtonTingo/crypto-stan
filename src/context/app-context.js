@@ -9,6 +9,7 @@ export const AppContextProvider = ({ children }) => {
   );
   const [activePath, setActivePath] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [notifOpen, setNotifOpen] = useState(false);
   const [nextRoute, setNextRoute] = useState("");
   const [lastLogin, setLastLogin] = useState(
     secureLocalStorage.getItem("lastLogin") || null
@@ -31,6 +32,9 @@ export const AppContextProvider = ({ children }) => {
 
         lastLogin,
         setLastLogin,
+
+        notifOpen,
+        setNotifOpen,
       }}
     >
       {children}

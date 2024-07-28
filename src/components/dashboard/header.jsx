@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
 import { AppContext } from "../../context/app-context";
+import NotifModal from "../notifications-modal";
 
 export default function Header() {
-  const { userData } = useContext(AppContext);
+  const { userData, notifOpen, setNotifOpen } = useContext(AppContext);
   return (
     <div className="h-[80px] w-[75%] bg-gradient-to-r from-gray-900 to-primary-900 shadow-lg fixed right-0 flex items-center justify-between px-10 z-50 gap-10">
       <div className="w-[25%] flex gap-2 items-center">
@@ -24,6 +25,7 @@ export default function Header() {
 
       <div className="w-[75%] flex items-center justify-end gap-2">
         <svg
+          onClick={() => setNotifOpen(!notifOpen)}
           viewBox="0 0 20 20"
           fill="currentColor"
           className="w-[40px] text-gray-100 cursor-pointer"
@@ -37,6 +39,8 @@ export default function Header() {
           className="w-[40px] h-[40px] rounded-[40px] border-2 border-myBlack cursor-pointer"
         />
       </div>
+
+      {notifOpen && <NotifModal />}
     </div>
   );
 }

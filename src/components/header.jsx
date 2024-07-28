@@ -5,6 +5,7 @@ import { googleLogout } from "@react-oauth/google";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import PrimaryButton from "./primary-button";
 import SecondaryButton from "./secondary-button";
+import NotifModal from "./notifications-modal";
 
 export default function Header() {
   const {
@@ -14,6 +15,7 @@ export default function Header() {
     setSearchContainer,
     cart,
     cartLength,
+    notifOpen,
   } = useContext(AppContext);
   const navItems = [
     {
