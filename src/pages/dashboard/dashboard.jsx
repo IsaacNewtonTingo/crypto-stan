@@ -66,7 +66,9 @@ export default function Dashboard() {
   }
   return (
     <div>
-      <Title className={"text-white"}>Welcome back John Doe</Title>
+      <Title className={"text-white"}>
+        Welcome back {userData?.firstName} {userData?.lastName}
+      </Title>
       <h2 className="text-gray-500">
         Happy to see you again. Get update of your asset today, good luck!!!
       </h2>

@@ -6,19 +6,14 @@ import OverviewCard from "../../components/overview-card";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
+import ContactModal from "../../components/dashboard/contact-modal";
 
 export default function Deposit() {
   const { userData } = useContext(AppContext);
-  const [transactions, setTransactions] = useState({
-    total: 3546.849,
-    data: [
-      {
-        amount: 536.67,
-        createdAt: "10/10/2023",
-        status: 1,
-      },
-    ],
-  });
+  const [transactions, setTransactions] = useState(null);
+  const [contactModal, setContactModal] = useState(false);
+  const [amount, setAmount] = useState("");
+  const [processing, setProcessing] = useState(false);
 
   const navigate = useNavigate();
 
@@ -70,6 +65,17 @@ export default function Deposit() {
     </svg>
   );
 
+  const callIcon = (
+    <svg
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className="w-[100px] text-primary-100"
+    >
+      <path d="M16.57 22a2 2 0 001.43-.59l2.71-2.71a1 1 0 000-1.41l-4-4a1 1 0 00-1.41 0l-1.6 1.59a7.55 7.55 0 01-3-1.59 7.62 7.62 0 01-1.59-3l1.59-1.6a1 1 0 000-1.41l-4-4a1 1 0 00-1.41 0L2.59 6A2 2 0 002 7.43 15.28 15.28 0 006.3 17.7 15.28 15.28 0 0016.57 22zM6 5.41L8.59 8 7.3 9.29a1 1 0 00-.3.91 10.12 10.12 0 002.3 4.5 10.08 10.08 0 004.5 2.3 1 1 0 00.91-.27L16 15.41 18.59 18l-2 2a13.28 13.28 0 01-8.87-3.71A13.28 13.28 0 014 7.41zM20 11h2a8.81 8.81 0 00-9-9v2a6.77 6.77 0 017 7z" />
+      <path d="M13 8c2.1 0 3 .9 3 3h2c0-3.22-1.78-5-5-5z" />
+    </svg>
+  );
+
   async function getTransactions() {
     try {
       const url = `${process.env.REACT_APP_API_ENDPOINT}/api/transactions?type=deposit&user=${userData?._id}`;
@@ -84,6 +90,34 @@ export default function Deposit() {
       toast.error("an error occured while getting transactions");
     }
   }
+
+  function toggleContactManager() {
+    setContactModal(!contactModal);
+  }
+
+  async function contactManager(e) {
+    try {
+      e.preventDefault();
+      setProcessing(true);
+      const url = `${process.env.REACT_APP_API_ENDPOINT}/api/transactions/contact-manager`;
+      const data = {
+        userID: userData._id,
+        amount,
+      };
+      const response = await axios.post(url, data, { withCredentials: true });
+      if (response.data.status === "Success") {
+        setAmount("");
+        setContactModal(false);
+        toast.success(response.data.message);
+      } else {
+        toast.error(response.data.message);
+      }
+      setProcessing(false);
+    } catch (error) {
+      setProcessing(false);
+      toast.error("an error occured while contacting");
+    }
+  }
   return (
     <div>
       <Title className={"text-white"}>Deposit</Title>
@@ -95,7 +129,7 @@ export default function Deposit() {
       <div className="grid grid-cols-1 lg:grid-cols-2 mt-10 gap-4">
         <OverviewCard
           title={"Total Deposit"}
-          content={`USD. ${transactions.total}`}
+          content={`USD. ${transactions?.total}`}
           icon={balanceIcon}
           sub={``}
           subColor={``}
@@ -103,9 +137,13 @@ export default function Deposit() {
         <OverviewCard
           title={"Contact line manager"}
           content={`Deposit`}
-          icon={addIcon}
+          icon={callIcon}
           sub={``}
           subColor={``}
+          onClick={() => toggleContactManager()}
+          className={
+            "hover:scale-[1.05] transition-tranform duration-300 hover:border-[1px] hover:border-primary-500"
+          }
         />
       </div>
 
@@ -133,7 +171,7 @@ export default function Deposit() {
             </tr>
           </thead>
           <tbody>
-            {transactions.data.map((item, index) => (
+            {transactions?.data?.map((item, index) => (
               <tr
                 key={item._id}
                 className="odd:bg-gray-900 even:bg-primary-900"
@@ -169,6 +207,16 @@ export default function Deposit() {
           </tbody>
         </table>
       </div>
+
+      {contactModal && (
+        <ContactModal
+          toggleContactModal={toggleContactManager}
+          amount={amount}
+          setAmount={setAmount}
+          contactManager={contactManager}
+          processing={processing}
+        />
+      )}
     </div>
   );
 }
