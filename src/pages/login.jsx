@@ -193,7 +193,7 @@ export default function Login() {
         <div className="flex items-center justify-center">
           <img
             onClick={() => navigate("/")}
-            src="/fx-nest-logo.png"
+            src="/crypto-stan-logo.png"
             alt="Smart Cash logo"
             className="object-contain w-[30%] cursor-pointer"
           />
@@ -226,7 +226,7 @@ export default function Login() {
             Forgot password ?{" "}
             <Link
               className="text-blue-500 font-bold hover:underline"
-              href={"/forgot-password"}
+              to={"/forgot-password"}
             >
               Reset
             </Link>

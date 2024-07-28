@@ -26,6 +26,7 @@ import Withdrawals from "./pages/admin/withdrawals";
 import AdminTransactions from "./pages/admin/transactions";
 import AdminReferrals from "./pages/admin/referrals";
 import UserDetails from "./pages/admin/user-details";
+import ForgotPassword from "./pages/forgot-password";
 
 function App() {
   const appRouter = createBrowserRouter([
@@ -36,6 +37,10 @@ function App() {
     {
       path: "login",
       element: <Login />,
+    },
+    {
+      path: "forgot-password",
+      element: <ForgotPassword />,
     },
     {
       path: "signup",

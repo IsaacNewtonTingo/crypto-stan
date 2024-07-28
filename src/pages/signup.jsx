@@ -175,7 +175,7 @@ export default function Signup() {
         <div className="flex items-center justify-center">
           <img
             onClick={() => navigate("/")}
-            src="/fx-nest-logo.png"
+            src="/crypto-stan-logo.png"
             alt="Crypto Stan Kenya logo"
             className="object-contain w-[30%] cursor-pointer"
           />

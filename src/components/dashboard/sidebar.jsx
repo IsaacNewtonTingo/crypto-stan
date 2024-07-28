@@ -119,7 +119,7 @@ export default function Sidebar() {
     <div className="h-screen w-[25%] bg-gradient-to-br from-gray-900 to-primary-900 flex flex-col items-center fixed z-40">
       <img
         className="w-[150px] mt-4"
-        src="/fx-nest-logo.png"
+        src="/crypto-stan-logo.png"
         alt="Smart Cash INV Logo"
       />
 

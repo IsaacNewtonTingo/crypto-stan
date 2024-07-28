@@ -5,6 +5,7 @@ import PrimaryButton from "../components/primary-button";
 import PlanCard from "../components/plan-card";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
   const security = [
@@ -143,7 +144,7 @@ export default function Home() {
   ];
 
   const [packages, setPackages] = useState([]);
-
+  const navigate = useNavigate();
   useEffect(() => {
     getPlans();
   }, []);
@@ -168,7 +169,7 @@ export default function Home() {
         style={{ backgroundImage: "url('/bg.png')" }}
         className="bg-cover bg-center h-[700px] w-full mt-[80px]"
       >
-        <div className="w-full w-[50%] px-10 lg:px-40 flex flex-col justify-end h-full pb-10 lg:pb-20 gap-10">
+        <div className="w-full lg:w-[50%] px-10 lg:px-40 flex flex-col justify-end h-full pb-10 lg:pb-20 gap-10">
           <Title className={"text-white"}>Future-proof your finances</Title>
           <p className="text-gray-300">
             With Smart Cash Investors, you can trade and invest securely,
@@ -176,7 +177,9 @@ export default function Home() {
           </p>
 
           <div className="w-1/2">
-            <PrimaryButton className="w-1/2">Get Started</PrimaryButton>
+            <PrimaryButton onClick={() => navigate("/login")} className="w-1/2">
+              Get Started
+            </PrimaryButton>
           </div>
         </div>
       </div>
