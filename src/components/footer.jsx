@@ -32,17 +32,17 @@ export default function Footer() {
         <div className="w-1/4">
           <img
             src="/fx-nest-logo.png"
-            alt="FX nest logo"
+            alt="Smart Cash INVlogo"
             className="cursor-pointer w-[200px] bg-white p-2 rounded-lg object-contain hover:scale-[1.05] transition-transform duration-300"
             onClick={() => navigate("/")}
           />
 
           <p className="mt-10">
-            FX Nest Investors is a premier online platform dedicated to secure
-            and profitable trading and investment opportunities. We provide our
-            clients with a reliable, user-friendly experience, ensuring
-            guaranteed returns and empowering them to build a prosperous
-            financial future.
+            Smart Cash Investors is a premier online platform dedicated to
+            secure and profitable trading and investment opportunities. We
+            provide our clients with a reliable, user-friendly experience,
+            ensuring guaranteed returns and empowering them to build a
+            prosperous financial future.
           </p>
         </div>
 
@@ -139,7 +139,7 @@ export default function Footer() {
       </div>
 
       <p className="text-[12px] text-gray-400 mt-10 lg:mt-20">
-        Copyright © 2024. All Rights Reserved. FX Nest Investors
+        Copyright © 2024. All Rights Reserved. Smart Cash Investors
       </p>
     </div>
   );

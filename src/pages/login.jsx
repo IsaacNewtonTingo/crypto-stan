@@ -194,7 +194,7 @@ export default function Login() {
           <img
             onClick={() => navigate("/")}
             src="/fx-nest-logo.png"
-            alt="FX Nest logo"
+            alt="Smart Cash logo"
             className="object-contain w-[30%] cursor-pointer"
           />
         </div>

@@ -9,7 +9,7 @@ export default function AboutUs() {
       <Container>
         <Title className={"text-primary-900"}>ABOUT</Title>
         <p>
-          <strong>FX Nest Investors</strong> is a premier online platform
+          <strong>Smart Cash Investors</strong> is a premier online platform
           dedicated to providing secure and profitable trading and investment
           opportunities. Our mission is to{" "}
           <strong>empower individuals and institutions</strong>
@@ -21,10 +21,10 @@ export default function AboutUs() {
             safe environment for our clients to grow their wealth.
           </strong>{" "}
           Whether you are a seasoned investor or just starting your financial
-          journey, FX Nest Investors offers the tools and resources you need to
-          succeed. <br />
+          journey, Smart Cash Investors offers the tools and resources you need
+          to succeed. <br />
           <br />
-          At FX Nest Investors, we understand that trust is the foundation of
+          At Smart Cash Investors, we understand that trust is the foundation of
           any successful investment relationship. That's why we employ
           cutting-edge security measures to protect your investments and
           personal information. Our platform is designed with the latest
@@ -39,7 +39,7 @@ export default function AboutUs() {
           resources to help you make informed investment decisions. Our platform
           features advanced analytical tools, market insights, and educational
           materials tailored to both novice and experienced investors. By
-          staying ahead of market trends and developments, FX Nest Investors
+          staying ahead of market trends and developments, Smart Cash Investors
           ensures that you have the information you need to maximize your
           returns. Our user-friendly interface makes it easy to navigate the
           complexities of trading and investment, allowing you to focus on what
@@ -48,8 +48,8 @@ export default function AboutUs() {
           Our dedicated support team is always available to assist you,
           providing personalized service and expert guidance whenever you need
           it. We believe in building long-term relationships with our clients,
-          and our support team is here to ensure your experience with FX Nest
-          Investors is nothing short of exceptional. Join FX Nest Investors
+          and our support team is here to ensure your experience with Smart Cash
+          Investors is nothing short of exceptional. Join Smart Cash Investors
           today and take advantage of our 100% guaranteed profit returns.
           Together, we can build a prosperous and secure financial future,
           empowering you to achieve your investment goals with confidence.

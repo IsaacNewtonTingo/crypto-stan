@@ -58,9 +58,9 @@ export default function Header() {
     <div className="fixed w-full flex items-center justify-center top-0 right-0 z-40">
       <div className="h-[80px] px-4 lg:px-40 w-full bg-gray-100 shadow-lg flex items-center justify-between lg:bg-opacity-80 lg:backdrop-blur-lg">
         <img
-          src="/fx-nest-logo.png"
-          alt="FX nest logo"
-          className="cursor-pointer w-[150px]  object-contain hover:scale-[1.05] transition-transform duration-300"
+          src="/crypto-stan-logo.png"
+          alt="Smart cash inv logo"
+          className="cursor-pointer w-[50px] object-contain hover:scale-[1.05] transition-transform duration-300"
           onClick={() => navigate("/")}
         />
 
@@ -83,7 +83,7 @@ export default function Header() {
 
         {!open ? (
           <div className="flex items-center gap-2">
-            <div className="w-[140px]">
+            <div className="hidden lg:block w-[140px]">
               <PrimaryButton
                 onClick={() => navigate("/login")}
                 className="font-bold"
@@ -92,7 +92,7 @@ export default function Header() {
               </PrimaryButton>
             </div>
 
-            <div className="w-[140px]">
+            <div className="hidden lg:block w-[140px]">
               <SecondaryButton onClick={() => navigate("/signup")} className="">
                 Register
               </SecondaryButton>
@@ -103,7 +103,7 @@ export default function Header() {
               viewBox="0 0 24 24"
               height="1em"
               width="1em"
-              className="text-[40px] lmd:block lg:hidden"
+              className="text-[40px] text-primary-900 lmd:block lg:hidden"
             >
               <path
                 fill="currentColor"

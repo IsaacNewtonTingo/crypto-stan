@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AppLayout from "../layouts/app-layout";
 import Title from "../components/title";
 import PrimaryButton from "../components/primary-button";
 import PlanCard from "../components/plan-card";
+import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function Home() {
   const security = [
@@ -154,67 +156,37 @@ export default function Home() {
     },
   ];
 
-  const packages = [
-    {
-      type: "Premium",
-      amount: 10000,
-      time: "6 Hours",
-      benefits: [
-        "Min. Possible deposit: $300",
-        "Max. Possible deposit: $9999",
-        "Minimum return 500%",
-        "Maximum return 5000%",
-        "$60 Gift Bonus",
-      ],
-    },
-    {
-      type: "Advanced (Recommended)",
-      amount: 5000,
-      time: "12 Hours",
-      benefits: [
-        "Min. Possible deposit: $100",
-        "Max. Possible deposit: $4999",
-        "Minimum return 50%",
-        "Maximum return 1000%",
-        "$42 Gift Bonus",
-      ],
-    },
-    {
-      type: "Standard",
-      amount: 1000,
-      time: "2 Days",
-      benefits: [
-        "Min. Possible deposit: $70",
-        "Max. Possible deposit: $999",
-        "Minimum return 12.5%",
-        "Maximum return 600%",
-        "$24 Gift Bonus",
-      ],
-    },
-    {
-      type: "Starter",
-      amount: 100,
-      time: "90 Days",
-      benefits: [
-        "Min. Possible deposit: $10",
-        "Max. Possible deposit: $99",
-        "Minimum return 5%",
-        "Maximum return 98%",
-        "$6 Gift Bonus",
-      ],
-    },
-  ];
+  const [packages, setPackages] = useState([]);
+
+  useEffect(() => {
+    getPlans();
+  }, []);
+
+  async function getPlans() {
+    try {
+      const url = `${process.env.REACT_APP_API_ENDPOINT}/api/plan`;
+      const response = await axios.get(url, { withCredentials: true });
+      if (response.data.status === "Success") {
+        setPackages(response.data.data);
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      toast.error("An error occured while getting plans");
+    }
+  }
   return (
     <AppLayout>
+      <Toaster />
       <div
         style={{ backgroundImage: "url('/bg.png')" }}
         className="bg-cover bg-center h-[700px] w-full mt-[80px]"
       >
-        <div className="w-[50%] px-40 flex flex-col justify-end h-full pb-20 gap-10">
+        <div className="w-full w-[50%] px-10 lg:px-40 flex flex-col justify-end h-full pb-10 lg:pb-20 gap-10">
           <Title className={"text-white"}>Future-proof your finances</Title>
           <p className="text-gray-300">
-            With FX Nest Investors, you can trade and invest securely, enjoying
-            100% guaranteed returns on your investments
+            With Smart Cash Investors, you can trade and invest securely,
+            enjoying 100% guaranteed returns on your investments
           </p>
 
           <div className="w-1/2">
@@ -238,7 +210,7 @@ export default function Home() {
 
       <div
         style={{ backgroundImage: "url('/bg2.png')" }}
-        className="px-40 py-10"
+        className="px-10 lg:px-40 py-10"
       >
         <p className="text-primary-500 text-center">Security</p>
 
@@ -246,14 +218,19 @@ export default function Home() {
           Guardian Secure: Where Safety Meets Trust
         </h2>
 
-        <div className="bg-cover bg-center w-full mt-10 grid grid-cols-2 lg:grid-cols-4 gap-10">
+        <div className="bg-cover bg-center w-full mt-10 grid grid-cols-1 lg:grid-cols-4 gap-10">
           {security.map((item) => (
-            <div key={item.title} className="">
+            <div
+              key={item.title}
+              className="flex flex-col items-center lg:block"
+            >
               <img className="w-[80px]" src={item.icon} />
-              <h4 className="font-bold text-gray-600 text-[20px] mb-4 mt-2">
+              <h4 className="font-bold text-gray-600 text-[20px] mb-4 mt-2 text-center lg:text-left">
                 {item.title}
               </h4>
-              <p className="text-gray-400">{item.description}</p>
+              <p className="text-gray-400  text-center lg:text-left">
+                {item.description}
+              </p>
             </div>
           ))}
         </div>
@@ -261,25 +238,25 @@ export default function Home() {
 
       <div
         // style={{ backgroundImage: "url('/bg2.png')" }}
-        className="px-40 py-10"
+        className="px-10 lg:px-40 py-10"
       >
         <p className="text-primary-500 text-center">Benefits</p>
         <h2 className="font-black text-[30px] text-gray-600 text-center">
           Our Best Services
         </h2>
-        <p>
-          At FX Nest Investors, we offer a comprehensive suite of services
+        <p className=" text-center lg:text-left">
+          At Smart Cash Investors, we offer a comprehensive suite of services
           designed to meet the diverse needs of our clients. Whether you’re a
           seasoned investor or just starting your journey, our range of services
           ensures you have the tools and support you need to achieve your
           financial goals.
         </p>
 
-        <div className="bg-cover bg-center w-full mt-10 grid grid-cols-2 lg:grid-cols-4 gap-2">
+        <div className="bg-cover bg-center w-full mt-10 grid grid-cols-1 lg:grid-cols-4 gap-2">
           {services.map((item) => (
             <div
               key={item.title}
-              className="border-[1px] rounded-lg p-4 border-gray-100"
+              className="border-[1px] rounded-lg p-4 border-gray-100 flex flex-col items-center lg:block"
             >
               <div className="bg-blue-100 w-[70px] h-[70px] rounded-lg flex items-center justify-center">
                 {item.icon}
@@ -287,7 +264,9 @@ export default function Home() {
               <h4 className="font-bold text-gray-600 text-[20px] mb-4 mt-2">
                 {item.title}
               </h4>
-              <p className="text-gray-400">{item.description}</p>
+              <p className="text-gray-400 text-center lg:text-left">
+                {item.description}
+              </p>
             </div>
           ))}
         </div>
@@ -295,7 +274,7 @@ export default function Home() {
 
       <div
         // style={{ backgroundImage: "url('/bg2.png')" }}
-        className="px-40 py-10"
+        className="px-10 lg:px-40 py-10"
       >
         <p className="text-primary-500 text-center font-bold">Packages</p>
         <h2 className="font-black text-[30px] text-gray-600 text-center">
@@ -306,7 +285,7 @@ export default function Home() {
           preferences.
         </p>
 
-        <div className="bg-cover bg-center w-full mt-10 grid grid-cols-2 lg:grid-cols-4 gap-2">
+        <div className="bg-cover bg-center w-full mt-10 grid grid-cols-1 lg:grid-cols-4 gap-2">
           {packages.map((item) => (
             <PlanCard item={item} key={item.type} />
           ))}

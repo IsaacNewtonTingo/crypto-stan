@@ -102,10 +102,10 @@ export default function ContactUs() {
 
             <p>
               Have questions or need assistance? Our dedicated support team at
-              FX Nest Investors is here to help. Reach out to us through any of
-              the contact methods below, and we'll get back to you promptly. We
-              look forward to assisting you with all your trading and investment
-              needs.
+              Smart Cash Investors is here to help. Reach out to us through any
+              of the contact methods below, and we'll get back to you promptly.
+              We look forward to assisting you with all your trading and
+              investment needs.
             </p>
 
             <div className="flex items-center gap-2 relative mt-10">

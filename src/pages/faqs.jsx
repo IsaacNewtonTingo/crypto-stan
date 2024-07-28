@@ -11,9 +11,9 @@ export default function FAQs() {
 
   const faqs = [
     {
-      question: "What is FX Nest Investors?",
+      question: "What is Smart Cash Investors?",
       answer:
-        "FX Nest Investors is an online platform that provides secure and profitable trading and investment opportunities, ensuring 100% guaranteed profit returns.",
+        "Smart Cash Investors is an online platform that provides secure and profitable trading and investment opportunities, ensuring 100% guaranteed profit returns.",
     },
     {
       question: "How do I create an account?",
@@ -63,7 +63,7 @@ export default function FAQs() {
     {
       question: "Are there any guarantees on returns?",
       answer:
-        "Yes, FX Nest Investors guarantees 100% profit returns on all investments, ensuring that your financial growth is secure and predictable.",
+        "Yes, Smart Cash Investors guarantees 100% profit returns on all investments, ensuring that your financial growth is secure and predictable.",
     },
     {
       question: "How do I stay updated on market trends?",
@@ -96,10 +96,10 @@ export default function FAQs() {
 
         <details className=" bg-primary-50 rounded-lg p-4 mb-2">
           <summary class="cursor-pointer font-bold text-[18px]">
-            What is FX Nest Investors?
+            What is Smart Cash Investors?
           </summary>
           <p className="text-gray-500 ml-4">
-            FX Nest Investors is an online platform that provides secure and
+            Smart Cash Investors is an online platform that provides secure and
             profitable trading and investment opportunities, ensuring 100%
             guaranteed profit returns.
           </p>

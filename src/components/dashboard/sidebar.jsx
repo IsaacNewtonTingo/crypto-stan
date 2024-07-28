@@ -120,7 +120,7 @@ export default function Sidebar() {
       <img
         className="w-[150px] mt-4"
         src="/fx-nest-logo.png"
-        alt="FX Nest Logo"
+        alt="Smart Cash INV Logo"
       />
 
       <div className="w-full p-10">
