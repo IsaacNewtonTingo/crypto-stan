@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
 import WithdrawalModal from "../../components/dashboard/withdrawal-modal";
+import LoadingData from "../../components/loading-data";
 
 export default function Withdraw() {
   const { userData } = useContext(AppContext);
@@ -14,12 +15,14 @@ export default function Withdraw() {
   const [withdrawalModal, setWithdrawalModal] = useState(false);
   const [amount, setAmount] = useState("");
   const [processing, setProcessing] = useState(false);
+  const [loadingData, setLoadingData] = useState(true);
 
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!userData) {
       navigate("/login");
+      setLoadingData(false);
     } else {
       getTransactions();
     }
@@ -88,8 +91,10 @@ export default function Withdraw() {
       } else {
         toast.error(response.data.message);
       }
+      setLoadingData(false);
     } catch (error) {
-      console.log(error);
+      setLoadingData(false);
+
       toast.error("an error occured while getting transactions");
     }
   }
@@ -99,6 +104,8 @@ export default function Withdraw() {
   }
   return (
     <div>
+      {loadingData && <LoadingData />}
+
       <Title className={"text-white"}>Withdraw</Title>
       <h2 className="text-gray-500">Have a look at your withdrawal records</h2>
 

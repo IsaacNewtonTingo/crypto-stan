@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
 import ContactModal from "../../components/dashboard/contact-modal";
+import LoadingData from "../../components/loading-data";
 
 export default function Deposit() {
   const { userData } = useContext(AppContext);
@@ -15,11 +16,14 @@ export default function Deposit() {
   const [amount, setAmount] = useState("");
   const [processing, setProcessing] = useState(false);
 
+  const [loadingData, setLoadingData] = useState(true);
+
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!userData) {
       navigate("/login");
+      setLoadingData(false);
     } else {
       getTransactions();
     }
@@ -78,6 +82,8 @@ export default function Deposit() {
 
   async function getTransactions() {
     try {
+      setLoadingData(true);
+
       const url = `${process.env.REACT_APP_API_ENDPOINT}/api/transactions?type=deposit&user=${userData?._id}`;
       const response = await axios.get(url, { withCredentials: true });
       if (response.data.status === "Success") {
@@ -85,8 +91,10 @@ export default function Deposit() {
       } else {
         toast.error(response.data.message);
       }
+      setLoadingData(false);
     } catch (error) {
-      console.log(error);
+      setLoadingData(false);
+
       toast.error("an error occured while getting transactions");
     }
   }
@@ -125,6 +133,7 @@ export default function Deposit() {
         In order to make a deposit, please contact your area manager{" "}
         <span className="text-white font-bold">Syed Omar</span>
       </h2>
+      {loadingData && <LoadingData />}
 
       <div className="grid grid-cols-1 lg:grid-cols-2 mt-10 gap-4">
         <OverviewCard

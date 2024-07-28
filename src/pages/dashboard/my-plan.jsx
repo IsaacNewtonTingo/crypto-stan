@@ -3,12 +3,14 @@ import PlanCard from "../../components/plan-card";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { AppContext } from "../../context/app-context";
+import LoadingData from "../../components/loading-data";
 
 export default function MyPlan() {
   const { userData } = useContext(AppContext);
   const [packages, setPackages] = useState([]);
   const [myPlan, setMyPlan] = useState(null);
   const [processing, setProcessing] = useState(false);
+  const [loadingData, setLoadingData] = useState(true);
 
   useEffect(() => {
     getPlans();
@@ -40,7 +42,10 @@ export default function MyPlan() {
       } else {
         toast.error(response.data.message);
       }
+      setLoadingData(false);
     } catch (error) {
+      setLoadingData(false);
+
       toast.error("An error occured while getting plan");
     }
   }
@@ -69,6 +74,7 @@ export default function MyPlan() {
   }
   return (
     <div>
+      {loadingData && <LoadingData />}
       <p className="text-primary-500 text-center font-bold">Packages</p>
       <h2 className="font-black text-[30px] text-white text-center">
         Tailored Investment Packages

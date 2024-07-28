@@ -6,6 +6,7 @@ import PlanCard from "../components/plan-card";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import LoadingData from "../components/loading-data";
 
 export default function Home() {
   const security = [
@@ -144,6 +145,8 @@ export default function Home() {
   ];
 
   const [packages, setPackages] = useState([]);
+  const [loadingData, setLoadingData] = useState(true);
+
   const navigate = useNavigate();
   useEffect(() => {
     getPlans();
@@ -151,6 +154,8 @@ export default function Home() {
 
   async function getPlans() {
     try {
+      setLoadingData(true);
+
       const url = `${process.env.REACT_APP_API_ENDPOINT}/api/plan`;
       const response = await axios.get(url, { withCredentials: true });
       if (response.data.status === "Success") {
@@ -158,13 +163,16 @@ export default function Home() {
       } else {
         toast.error(response.data.message);
       }
+      setLoadingData(false);
     } catch (error) {
+      setLoadingData(false);
       toast.error("An error occured while getting plans");
     }
   }
   return (
     <AppLayout>
       <Toaster />
+      {loadingData && <LoadingData />}
       <div
         style={{ backgroundImage: "url('/bg.png')" }}
         className="bg-cover bg-center h-[700px] w-full mt-[80px]"

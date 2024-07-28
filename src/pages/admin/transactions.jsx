@@ -6,10 +6,12 @@ import OverviewCard from "../../components/overview-card";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
+import LoadingData from "../../components/loading-data";
 
 export default function AdminTransactions() {
   const { userData } = useContext(AppContext);
   const [transactions, setTransactions] = useState(null);
+  const [loadingData, setLoadingData] = useState(true);
 
   const navigate = useNavigate();
 
@@ -81,14 +83,18 @@ export default function AdminTransactions() {
       } else {
         toast.error(response.data.message);
       }
+      setLoadingData(false);
     } catch (error) {
-      console.log(error);
+      setLoadingData(false);
+
       toast.error("an error occured while getting transactions");
     }
   }
   return (
     <div>
       <Title className={"text-white"}>Transactions</Title>
+      {loadingData && <LoadingData />}
+
       <h2 className="text-gray-500">Have a look at your transaction records</h2>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 mt-10 gap-4">

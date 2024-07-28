@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
 import ContactModal from "../../components/dashboard/contact-modal";
+import LoadingData from "../../components/loading-data";
 
 export default function Deposits() {
   const { userData } = useContext(AppContext);
@@ -14,6 +15,7 @@ export default function Deposits() {
   const [contactModal, setContactModal] = useState(false);
   const [amount, setAmount] = useState("");
   const [processing, setProcessing] = useState(false);
+  const [loadingData, setLoadingData] = useState(true);
 
   const navigate = useNavigate();
 
@@ -85,8 +87,10 @@ export default function Deposits() {
       } else {
         toast.error(response.data.message);
       }
+      setLoadingData(false);
     } catch (error) {
-      console.log(error);
+      setLoadingData(false);
+
       toast.error("an error occured while getting transactions");
     }
   }
@@ -120,6 +124,8 @@ export default function Deposits() {
   }
   return (
     <div>
+      {loadingData && <LoadingData />}
+
       <Title className={"text-white"}>Deposits</Title>
       <h2 className="text-gray-500">Have a look at all deposits</h2>
 

@@ -7,10 +7,13 @@ import { AppContext } from "../../context/app-context";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
+import LoadingData from "../../components/loading-data";
 
 export default function Dashboard() {
   const { userData } = useContext(AppContext);
+
   const [transactions, setTransactions] = useState(null);
+  const [loadingData, setLoadingData] = useState(true);
 
   const navigate = useNavigate();
 
@@ -44,6 +47,7 @@ export default function Dashboard() {
   useEffect(() => {
     if (!userData) {
       navigate("/login");
+      setLoadingData(false);
     } else {
       getTransactions();
     }
@@ -51,6 +55,8 @@ export default function Dashboard() {
 
   async function getTransactions() {
     try {
+      setLoadingData(true);
+
       const url = `${process.env.REACT_APP_API_ENDPOINT}/api/transactions?user=${userData?._id}`;
       const response = await axios.get(url, { withCredentials: true });
       if (response.data.status === "Success") {
@@ -58,8 +64,10 @@ export default function Dashboard() {
       } else {
         toast.error(response.data.message);
       }
+      setLoadingData(false);
     } catch (error) {
-      console.log(error);
+      setLoadingData(false);
+
       toast.error("an error occured while getting transactions");
     }
   }
@@ -71,6 +79,7 @@ export default function Dashboard() {
       <h2 className="text-gray-500">
         Happy to see you again. Get update of your asset today, good luck!!!
       </h2>
+      {loadingData && <LoadingData />}
 
       <div className="grid grid-cols-1 lg:grid-cols-2 mt-10 gap-4">
         <OverviewCard

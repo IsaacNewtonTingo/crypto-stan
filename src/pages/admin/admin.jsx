@@ -6,11 +6,13 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../context/app-context";
 import axios from "axios";
+import LoadingData from "../../components/loading-data";
 
 export default function Admin() {
   const { userData } = useContext(AppContext);
   const [totalUsers, setTotalUsers] = useState();
   const [transactions, setTransactions] = useState(null);
+  const [loadingData, setLoadingData] = useState(true);
 
   const depositIcon = (
     <svg
@@ -107,20 +109,23 @@ export default function Admin() {
     try {
       const url = `${process.env.REACT_APP_API_ENDPOINT}/api/transactions/admin-transactions/`;
       const response = await axios.get(url, { withCredentials: true });
-      console.log(response.data);
       if (response.data.status === "Success") {
         setTransactions(response.data.data);
       } else {
         toast.error(response.data.message);
       }
+      setLoadingData(false);
     } catch (error) {
-      console.log(error);
+      setLoadingData(false);
+
       toast.error("an error occured while getting transactions");
     }
   }
 
   return (
     <div>
+      {loadingData && <LoadingData />}
+
       <Title className={"text-white"}>
         Welcome back {userData.firstName} {userData.lastName}
       </Title>

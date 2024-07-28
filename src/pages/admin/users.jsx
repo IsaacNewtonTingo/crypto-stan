@@ -7,6 +7,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { AppContext } from "../../context/app-context";
 import { Link, useNavigate } from "react-router-dom";
 import EditBalanceModal from "../../components/admin/edit-balance-modal";
+import LoadingData from "../../components/loading-data";
 
 export default function Users() {
   const { userData } = useContext(AppContext);
@@ -44,6 +45,7 @@ export default function Users() {
 
   const [balance, setBalance] = useState(0);
   const [processing, setProcessing] = useState(0);
+  const [loadingData, setLoadingData] = useState(true);
 
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
@@ -56,6 +58,7 @@ export default function Users() {
       getUsers();
     } else {
       navigate("/login");
+      setLoadingData(false);
     }
 
     document.addEventListener("mousedown", handleClickOutside);
@@ -73,7 +76,10 @@ export default function Users() {
       } else {
         toast.error(response.data.message);
       }
+      setLoadingData(false);
     } catch (error) {
+      setLoadingData(false);
+
       toast.error("An error occured while getting users");
     }
   }
@@ -124,6 +130,8 @@ export default function Users() {
   return (
     <div>
       <Toaster />
+      {loadingData && <LoadingData />}
+
       <Title className={"text-white"}>Welcome back John Doe</Title>
       <h2 className="text-gray-500">
         Happy to see you again. Get update of your asset today, good luck!!!

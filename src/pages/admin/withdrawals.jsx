@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
 import ContactModal from "../../components/dashboard/contact-modal";
+import LoadingData from "../../components/loading-data";
 
 export default function Withdrawals() {
   const { userData } = useContext(AppContext);
@@ -14,12 +15,14 @@ export default function Withdrawals() {
   const [contactModal, setContactModal] = useState(false);
   const [amount, setAmount] = useState("");
   const [processing, setProcessing] = useState(false);
+  const [loadingData, setLoadingData] = useState(true);
 
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!userData) {
       navigate("/login");
+      setLoadingData(false);
     } else {
       getTransactions();
     }
@@ -85,8 +88,10 @@ export default function Withdrawals() {
       } else {
         toast.error(response.data.message);
       }
+      setLoadingData(false);
     } catch (error) {
-      console.log(error);
+      setLoadingData(false);
+
       toast.error("an error occured while getting transactions");
     }
   }
@@ -121,6 +126,8 @@ export default function Withdrawals() {
   return (
     <div>
       <Title className={"text-white"}>Withdrawals</Title>
+      {loadingData && <LoadingData />}
+
       <h2 className="text-gray-500">Have a look at all withdrawals</h2>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 mt-10 gap-4">

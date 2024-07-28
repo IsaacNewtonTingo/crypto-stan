@@ -4,9 +4,11 @@ import PlanCard from "../components/plan-card";
 import AppLayout from "../layouts/app-layout";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import LoadingData from "../components/loading-data";
 
 export default function Plans() {
   const [packages, setPackages] = useState([]);
+  const [loadingData, setLoadingData] = useState(true);
 
   useEffect(() => {
     getPlans();
@@ -21,7 +23,9 @@ export default function Plans() {
       } else {
         toast.error(response.data.message);
       }
+      setLoadingData(false);
     } catch (error) {
+      setLoadingData(false);
       toast.error("An error occured while getting plans");
     }
   }
@@ -29,6 +33,8 @@ export default function Plans() {
     <AppLayout>
       <Container>
         <Toaster />
+        {loadingData && <LoadingData />}
+
         <p className="text-primary-500 text-center font-bold">Packages</p>
         <h2 className="font-black text-[30px] text-gray-600 text-center">
           Tailored Investment Packages

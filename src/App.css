@@ -36,3 +36,34 @@
     transform: rotate(360deg);
   }
 }
+@keyframes zoomInOut {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.zoom-effect {
+  width: 250px;
+  height: 250px;
+  overflow: hidden;
+  margin: 0 auto;
+  animation: zoomInOut 1s infinite;
+}
+
+.zoom-effect img {
+  height: auto;
+  display: block;
+}
+
+@media screen and (max-width: 768px) {
+  .zoom-effect {
+    width: 100px;
+    height: 100px;
+  }
+}
