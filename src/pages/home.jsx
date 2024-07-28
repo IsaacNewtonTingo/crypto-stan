@@ -49,21 +49,7 @@ export default function Home() {
         </svg>
       ),
     },
-    {
-      title: "Portfolio Management",
-      description:
-        "Leave the complexities of managing your investments to us. Our professional portfolio management services ensure that your assets are strategically allocated and continuously monitored to maximize returns while minimizing risk.",
-      icon: (
-        <svg
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          className="text-blue-500 w-[50px]"
-        >
-          <path fill="none" d="M0 0h24v24H0z" />
-          <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm-3-9v2H8v2h8v-2h-5v-2h3v-2h-3v-1a1.5 1.5 0 012.76-.815l1.986-.496A3.501 3.501 0 009 10v1H8v2h1z" />
-        </svg>
-      ),
-    },
+
     {
       title: "Cryptocurrency Trading",
       description:
@@ -201,9 +187,9 @@ export default function Home() {
           width="100%"
           height="36px"
           scrolling="auto"
-          marginwidth="0"
-          marginheight="0"
-          frameborder="0"
+          marginWidth="0"
+          marginHeight="0"
+          frameBorder="0"
           border="0"
         ></iframe>
       </div>
@@ -287,7 +273,7 @@ export default function Home() {
 
         <div className="bg-cover bg-center w-full mt-10 grid grid-cols-1 lg:grid-cols-4 gap-2">
           {packages.map((item) => (
-            <PlanCard item={item} key={item.type} />
+            <PlanCard item={item} key={item._id} />
           ))}
         </div>
       </div>

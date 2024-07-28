@@ -29,11 +29,11 @@ export default function Footer() {
   return (
     <div className="bg-gradient-to-r from-gray-900 to-primary-900 px-10 lg:px-40 py-10 lg:py-20">
       <div className="w-full flex flex-col lg:flex-row gap-10 justify-between text-gray-400 ">
-        <div className="w-1/4">
+        <div className="w-full lg:w-1/4">
           <img
-            src="/fx-nest-logo.png"
+            src="/crypto-stan-logo.png"
             alt="Smart Cash INVlogo"
-            className="cursor-pointer w-[200px] bg-white p-2 rounded-lg object-contain hover:scale-[1.05] transition-transform duration-300"
+            className="cursor-pointer w-[50px] p-2 rounded-lg object-contain hover:scale-[1.05] transition-transform duration-300"
             onClick={() => navigate("/")}
           />
 
@@ -55,6 +55,7 @@ export default function Footer() {
                 <Link
                   className="hover:text-white hover:font-bold transition-font"
                   to={item.navTo}
+                  key={item.navTo}
                 >
                   {item.name}
                 </Link>

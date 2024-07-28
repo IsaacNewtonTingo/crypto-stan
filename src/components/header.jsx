@@ -139,7 +139,7 @@ export default function Header() {
                     return (
                       <div key={item.name}>
                         <Link
-                          href={item.navTo}
+                          to={item.navTo}
                           className={`${linkStyles}`}
                           onClick={() => {
                             toggleMenu();

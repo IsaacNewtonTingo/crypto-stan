@@ -89,13 +89,13 @@ export default function FAQs() {
         <meta property="og:url" content="https://customjerseys.co.ke/faqs" />
         <meta property="og:image" content="/custom-jerseys-og-image.png" />
       </Head> */}
-      <div className="px-40 py-[100px] w-[60%]">
+      <div className="px-10 lg:px-40 py-[100px] w-full lg:w-[60%]">
         <Title className={"mb-4 text-primary-900"}>
           Frequently Asked Questions
         </Title>
 
         <details className=" bg-primary-50 rounded-lg p-4 mb-2">
-          <summary class="cursor-pointer font-bold text-[18px]">
+          <summary className="cursor-pointer font-bold text-[18px]">
             What is Smart Cash Investors?
           </summary>
           <p className="text-gray-500 ml-4">
