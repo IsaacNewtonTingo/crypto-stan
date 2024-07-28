@@ -95,7 +95,7 @@ export default function ContactUs() {
 
         <Toaster />
 
-        <div className="pt-10 pb-10 grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-20">
+        <div className="pt-10 pb-10 flex flex-col lg:flex-row gap-6 lg:gap-20">
           <div className="w-full lg:w-1/2">
             <Title className={"text-primary-900"}>CONTACT US</Title>
             <Line />
