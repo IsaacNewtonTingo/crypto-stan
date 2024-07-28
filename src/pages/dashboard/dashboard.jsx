@@ -5,10 +5,13 @@ import moment from "moment";
 import OverviewCard from "../../components/overview-card";
 import { AppContext } from "../../context/app-context";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import axios from "axios";
 
 export default function Dashboard() {
   const { userData } = useContext(AppContext);
   const [totalBalance, setTotalBalance] = useState(24536.55);
+  const [transactions, setTransactions] = useState(null);
 
   const navigate = useNavigate();
 
@@ -28,35 +31,39 @@ export default function Dashboard() {
     </svg>
   );
 
-  const transactions = [
-    {
-      _id: 1,
-      amount: "243.99",
-      created_at: "10/10/2012",
-      type: "Deposit",
-      status: 1,
-    },
-    {
-      _id: 2,
-      amount: "10.99",
-      created_at: "10/10/2012",
-      type: "Withdrawal",
-      status: 0,
-    },
-    {
-      _id: 3,
-      amount: "100.99",
-      created_at: "10/10/2012",
-      type: "Withdrawal",
-      status: 2,
-    },
-  ];
+  const transactionIcon = (
+    <svg
+      data-name="Layer 1"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className="w-[100px] text-primary-100"
+    >
+      <path d="M20 2H10a3 3 0 00-3 3v7a3 3 0 003 3h10a3 3 0 003-3V5a3 3 0 00-3-3zm1 10a1 1 0 01-1 1H10a1 1 0 01-1-1V5a1 1 0 011-1h10a1 1 0 011 1zm-3.5-4a1.49 1.49 0 00-1 .39 1.5 1.5 0 100 2.22 1.5 1.5 0 101-2.61zM16 17a1 1 0 00-1 1v1a1 1 0 01-1 1H4a1 1 0 01-1-1v-4h1a1 1 0 000-2H3v-1a1 1 0 011-1 1 1 0 000-2 3 3 0 00-3 3v7a3 3 0 003 3h10a3 3 0 003-3v-1a1 1 0 00-1-1zM6 18h1a1 1 0 000-2H6a1 1 0 000 2z" />
+    </svg>
+  );
 
   useEffect(() => {
     if (!userData) {
       navigate("/login");
+    } else {
+      getTransactions();
     }
   }, []);
+
+  async function getTransactions() {
+    try {
+      const url = `${process.env.REACT_APP_API_ENDPOINT}/api/transactions?user=${userData?._id}`;
+      const response = await axios.get(url, { withCredentials: true });
+      if (response.data.status === "Success") {
+        setTransactions(response.data.data);
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("an error occured while getting transactions");
+    }
+  }
   return (
     <div>
       <Title className={"text-white"}>Welcome back John Doe</Title>
@@ -74,8 +81,8 @@ export default function Dashboard() {
         />
         <OverviewCard
           title={"Total Transactions"}
-          content={`USD. ${userData.accountBalance}`}
-          icon={balanceIcon}
+          content={transactions?.count}
+          icon={transactionIcon}
           sub={``}
           subColor={``}
         />
@@ -105,7 +112,7 @@ export default function Dashboard() {
             </tr>
           </thead>
           <tbody>
-            {transactions.map((item, index) => (
+            {transactions?.data?.map((item, index) => (
               <tr
                 key={item._id}
                 className="odd:bg-gray-900 even:bg-primary-900"
@@ -119,7 +126,7 @@ export default function Dashboard() {
                 </th>
                 <td className="px-6 py-4">{item.type}</td>
                 <td className="px-6 py-4">
-                  {moment(item.created_at).format("lll")}
+                  {moment(item.createdAt).format("lll")}
                 </td>
                 <td
                   className={`px-6 py-4 font-bold ${
