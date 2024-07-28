@@ -10,7 +10,6 @@ import axios from "axios";
 
 export default function Dashboard() {
   const { userData } = useContext(AppContext);
-  const [totalBalance, setTotalBalance] = useState(24536.55);
   const [transactions, setTransactions] = useState(null);
 
   const navigate = useNavigate();

@@ -1,27 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import OverviewCard from "../../components/overview-card";
 import Title from "../../components/title";
 import moment from "moment";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { AppContext } from "../../context/app-context";
+import axios from "axios";
 
 export default function Admin() {
-  const [totalUsers, setTotalUsers] = useState({
-    total: 24,
-    difference: 56,
-    percentage: 12,
-  });
-  const [totalDeposits, setTotalDeposits] = useState({
-    number: 100,
-    total: 674355.99,
-  });
-  const [pendingWithdrawals, setPendingWithdrawals] = useState({
-    number: 23,
-    total: 6755.99,
-  });
-  const [totalBalance, setTotalBalance] = useState({
-    total: 5647,
-    difference: 45,
-    percentage: 12,
-  });
+  const { userData } = useContext(AppContext);
+  const [totalUsers, setTotalUsers] = useState();
+  const [transactions, setTransactions] = useState(null);
 
   const depositIcon = (
     <svg
@@ -86,45 +75,55 @@ export default function Admin() {
     </svg>
   );
 
-  const transactions = [
-    {
-      _id: 1,
-      first_name: "King",
-      last_name: "James",
-      amount: "243.99",
-      created_at: "10/10/2012",
-      type: "Deposit",
-      status: 1,
-    },
-    {
-      _id: 2,
-      first_name: "King",
-      last_name: "James",
-      amount: "10.99",
-      created_at: "10/10/2012",
-      type: "Withdrawal",
-      status: 0,
-    },
-    {
-      _id: 3,
-      first_name: "King",
-      last_name: "James",
-      amount: "100.99",
-      created_at: "10/10/2012",
-      type: "Withdrawal",
-      status: 2,
-    },
-  ];
-  /**
-   * All users
-   * Net amount
-   * Pending withrawals
-   * Pending Deposits
-   * recent transactions
-   */
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (
+      userData &&
+      (userData.roleID == "superAdmin" || userData.roleID == "admin")
+    ) {
+      getUsers();
+      getTransactions();
+    } else {
+      navigate("/login");
+    }
+  }, []);
+
+  async function getUsers() {
+    try {
+      const url = `${process.env.REACT_APP_API_ENDPOINT}/api/user`;
+      const response = await axios.get(url, { withCredentials: true });
+      if (response.data.status == "Success") {
+        setTotalUsers(response.data.data);
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      toast.error("An error occured while getting users");
+    }
+  }
+
+  async function getTransactions() {
+    try {
+      const url = `${process.env.REACT_APP_API_ENDPOINT}/api/transactions/admin-transactions/`;
+      const response = await axios.get(url, { withCredentials: true });
+      console.log(response.data);
+      if (response.data.status === "Success") {
+        setTransactions(response.data.data);
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("an error occured while getting transactions");
+    }
+  }
+
   return (
     <div>
-      <Title className={"text-white"}>Welcome back John Doe</Title>
+      <Title className={"text-white"}>
+        Welcome back {userData.firstName} {userData.lastName}
+      </Title>
       <h2 className="text-gray-500">
         Happy to see you again. Get update of your asset today, good luck!!!
       </h2>
@@ -132,38 +131,34 @@ export default function Admin() {
       <div className="grid grid-cols-1 lg:grid-cols-2 mt-10 gap-4">
         <OverviewCard
           title={"Total Balance"}
-          content={`$${totalBalance.total}`}
+          content={`$${transactions?.balance}`}
           icon={balanceIcon}
-          sub={`${totalBalance.difference}(${totalBalance.percentage}%)`}
-          subColor={`${
-            totalBalance.difference > 0 ? "text-green-400" : "text-red-400"
-          }`}
+          // sub={`${totalBalance.difference}(${totalBalance.percentage}%)`}
+          // subColor={`${
+          //   totalBalance.difference > 0 ? "text-green-400" : "text-red-400"
+          // }`}
         />
         <OverviewCard
           title={"All Users"}
-          content={`${totalUsers.total}`}
+          content={`${totalUsers?.total}`}
           icon={usersIcon}
-          sub={`${totalUsers.difference > 0 ? "+" : "-"}${totalUsers.total}(${
-            totalUsers.percentage
-          }%)`}
-          subColor={`${
-            totalUsers.difference > 0 ? "text-green-400" : "text-red-400"
-          }`}
+          sub={``}
+          subColor={``}
         />
 
         <OverviewCard
           title={"Total Deposits"}
-          content={`$${totalDeposits.total}`}
+          content={`$${transactions?.deposits?.amount}`}
           icon={depositIcon}
-          sub={totalDeposits.number}
+          sub={transactions?.deposits?.count}
           subColor={`${"text-green-400"}`}
         />
 
         <OverviewCard
-          title={"Pending Withdrawals"}
-          content={`$${pendingWithdrawals.total}`}
+          title={"Total Withdrawals"}
+          content={`$${transactions?.withdrawals?.amount}`}
           icon={withdrawIcon}
-          sub={pendingWithdrawals.number}
+          sub={transactions?.withdrawals?.count}
           subColor={`${"text-green-400"}`}
         />
       </div>
@@ -195,14 +190,14 @@ export default function Admin() {
             </tr>
           </thead>
           <tbody>
-            {transactions.map((item, index) => (
+            {transactions?.data?.map((item, index) => (
               <tr
                 key={item._id}
                 className="odd:bg-gray-900 even:bg-primary-900"
               >
                 <td className="px-6 py-4">{index + 1}</td>
                 <td className="px-6 py-4">
-                  {item.first_name} {item.last_name}
+                  {item.user.firstName} {item.user.lastName}
                 </td>
                 <th
                   scope="row"
