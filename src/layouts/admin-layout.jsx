@@ -13,7 +13,7 @@ export default function AdminLayout({ children }) {
       <div className="flex justify-between">
         <AdminSidebar />
 
-        <div className="w-[75%] ml-auto mt-[70px] p-10 min-h-screen">
+        <div className="w-full lg:w-[75%] ml-auto mt-[70px] p-6 lg:p-10 min-h-screen">
           {location.pathname === "/admin" && <Admin />}
           <Outlet />
         </div>
