@@ -84,7 +84,7 @@ export default function MyPlan() {
         preferences.
       </p>
 
-      <div className="bg-cover bg-center w-full mt-14 grid grid-cols-2 lg:grid-cols-4 gap-2">
+      <div className="bg-cover bg-center w-full mt-14 grid grid-cols-1 lg:grid-cols-4 gap-2">
         {packages.map((item) => (
           <PlanCard
             buyPlan={buyPlan}

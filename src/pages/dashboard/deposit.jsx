@@ -100,7 +100,8 @@ export default function Deposit() {
   }
 
   function toggleContactManager() {
-    setContactModal(!contactModal);
+    // setContactModal(!contactModal);
+    window.location.href = "https://t.me/Omarfxbtc"
   }
 
   async function contactManager(e) {
@@ -197,19 +198,18 @@ export default function Deposit() {
                   {moment(item.createdAt).format("lll")}
                 </td>
                 <td
-                  className={`px-6 py-4 font-bold ${
-                    item.status === 0
+                  className={`px-6 py-4 font-bold ${item.status === 0
                       ? "text-red-700"
                       : item.status === 1
-                      ? "text-green-500"
-                      : "text-orange-400"
-                  }`}
+                        ? "text-green-500"
+                        : "text-orange-400"
+                    }`}
                 >
                   {item.status === 0
                     ? "Failed"
                     : item.status === 1
-                    ? "Complete"
-                    : "Pending"}
+                      ? "Complete"
+                      : "Pending"}
                 </td>
               </tr>
             ))}
