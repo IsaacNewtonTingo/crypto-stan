@@ -37,7 +37,7 @@ export default function WithdrawalModal({
         </div>
 
         <p className="text-gray-500 mt-4">
-          Please enter the details below. Your withrawal request will be
+          Please enter the details below. Your Withdrawal request will be
           processed by your line manager
         </p>
 

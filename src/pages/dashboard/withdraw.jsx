@@ -111,7 +111,7 @@ export default function Withdraw() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 mt-10 gap-4">
         <OverviewCard
-          title={"Total Withrawal"}
+          title={"Total Withdrawal"}
           content={`USD. ${transactions?.total}`}
           icon={balanceIcon}
           sub={``}

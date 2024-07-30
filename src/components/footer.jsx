@@ -38,11 +38,11 @@ export default function Footer() {
           />
 
           <p className="mt-10">
-            Smart Cash Investors is a premier online platform dedicated to
-            secure and profitable trading and investment opportunities. We
-            provide our clients with a reliable, user-friendly experience,
-            ensuring guaranteed returns and empowering them to build a
-            prosperous financial future.
+            First Co Limited is a premier online platform dedicated to secure
+            and profitable trading and investment opportunities. We provide our
+            clients with a reliable, user-friendly experience, ensuring
+            guaranteed returns and empowering them to build a prosperous
+            financial future.
           </p>
         </div>
 
@@ -140,7 +140,7 @@ export default function Footer() {
       </div>
 
       <p className="text-[12px] text-gray-400 mt-10 lg:mt-20">
-        Copyright © 2024. All Rights Reserved. Smart Cash Investors
+        Copyright © 2024. All Rights Reserved. First Co Limited
       </p>
     </div>
   );

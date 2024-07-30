@@ -180,8 +180,8 @@ export default function Home() {
         <div className="w-full lg:w-[50%] px-10 lg:px-40 flex flex-col justify-end h-full pb-10 lg:pb-20 gap-10">
           <Title className={"text-white"}>Future-proof your finances</Title>
           <p className="text-gray-300">
-            With Smart Cash Investors, you can trade and invest securely,
-            enjoying 100% guaranteed returns on your investments
+            With First Co Limited, you can trade and invest securely, enjoying
+            100% guaranteed returns on your investments
           </p>
 
           <div className="w-1/2">
@@ -242,7 +242,7 @@ export default function Home() {
           Our Best Services
         </h2>
         <p className=" text-center lg:text-left">
-          At Smart Cash Investors, we offer a comprehensive suite of services
+          At First Co Limited, we offer a comprehensive suite of services
           designed to meet the diverse needs of our clients. Whether you’re a
           seasoned investor or just starting your journey, our range of services
           ensures you have the tools and support you need to achieve your

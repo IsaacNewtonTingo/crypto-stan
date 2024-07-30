@@ -11,9 +11,9 @@ export default function FAQs() {
 
   const faqs = [
     {
-      question: "What is Smart Cash Investors?",
+      question: "What is First Co Limited?",
       answer:
-        "Smart Cash Investors is an online platform that provides secure and profitable trading and investment opportunities, ensuring 100% guaranteed profit returns.",
+        "First Co Limited is an online platform that provides secure and profitable trading and investment opportunities, ensuring 100% guaranteed profit returns.",
     },
     {
       question: "How do I create an account?",
@@ -63,7 +63,7 @@ export default function FAQs() {
     {
       question: "Are there any guarantees on returns?",
       answer:
-        "Yes, Smart Cash Investors guarantees 100% profit returns on all investments, ensuring that your financial growth is secure and predictable.",
+        "Yes, First Co Limited guarantees 100% profit returns on all investments, ensuring that your financial growth is secure and predictable.",
     },
     {
       question: "How do I stay updated on market trends?",
@@ -96,10 +96,10 @@ export default function FAQs() {
 
         <details className=" bg-primary-50 rounded-lg p-4 mb-2">
           <summary className="cursor-pointer font-bold text-[18px]">
-            What is Smart Cash Investors?
+            What is First Co Limited?
           </summary>
           <p className="text-gray-500 ml-4">
-            Smart Cash Investors is an online platform that provides secure and
+            First Co Limited is an online platform that provides secure and
             profitable trading and investment opportunities, ensuring 100%
             guaranteed profit returns.
           </p>

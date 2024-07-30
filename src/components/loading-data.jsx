@@ -6,7 +6,7 @@ export default function LoadingData() {
       <div className="zoom-effect">
         <img
           src="/crypto-stan-logo.png"
-          alt="Smart cash Investors"
+          alt="First Co Limited"
           className="w-[100px] h-[100px]"
         />
       </div>
