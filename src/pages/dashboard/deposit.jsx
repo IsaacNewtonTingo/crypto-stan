@@ -132,7 +132,7 @@ export default function Deposit() {
       <Title className={"text-white"}>Deposit</Title>
       <h2 className="text-gray-500">
         In order to make a deposit, please contact your area manager{" "}
-        <span className="text-white font-bold">Syed Omar</span>
+        <span className="text-white font-bold">Hassan Syed</span>
       </h2>
       {loadingData && <LoadingData />}
 
@@ -145,7 +145,7 @@ export default function Deposit() {
           subColor={``}
         />
         <OverviewCard
-          title={"Contact line manager"}
+          title={"Click to contact manager"}
           content={`Deposit`}
           icon={callIcon}
           sub={``}
@@ -199,10 +199,10 @@ export default function Deposit() {
                 </td>
                 <td
                   className={`px-6 py-4 font-bold ${item.status === 0
-                      ? "text-red-700"
-                      : item.status === 1
-                        ? "text-green-500"
-                        : "text-orange-400"
+                    ? "text-red-700"
+                    : item.status === 1
+                      ? "text-green-500"
+                      : "text-orange-400"
                     }`}
                 >
                   {item.status === 0
