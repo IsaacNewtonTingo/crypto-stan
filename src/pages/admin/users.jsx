@@ -111,6 +111,7 @@ export default function Users() {
         getUsers();
         setActiveItem(null);
         setDropdown(false);
+        setBalance("")
       } else {
         toast.error(response.data.message);
       }
@@ -143,9 +144,8 @@ export default function Users() {
           content={`${totalUsers.total}`}
           icon={usersIcon}
           sub={``}
-          subColor={`${
-            totalUsers.difference > 0 ? "text-green-400" : "text-red-400"
-          }`}
+          subColor={`${totalUsers.difference > 0 ? "text-green-400" : "text-red-400"
+            }`}
         />
 
         <OverviewCard
@@ -194,6 +194,7 @@ export default function Users() {
           <tbody className="overflow-auto">
             {totalUsers.data.map((item, index) => (
               <tr
+                onClick={() => toggleEditModal(item)}
                 key={item._id}
                 className="odd:bg-gray-900 even:bg-primary-900"
               >
@@ -227,16 +228,16 @@ export default function Users() {
                   {dropdown && activeItem._id == item._id && (
                     <ul
                       ref={dropdownRef}
-                      className="bg-white rounded-lg text-gray-500"
+                      className="bg-white rounded-lg text-gray-500 w-[200px]"
                     >
-                      <button
+                      {/* <button
                         onClick={() => navigate(`${item._id}`)}
                         to={`${item._id}`}
                         className="w-full text-left p-4 hover:bg-gray-100"
                       >
                         View Details
                       </button>
-                      <br />
+                      <br /> */}
 
                       <button
                         onClick={() => toggleEditModal(item)}
