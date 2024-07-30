@@ -101,7 +101,7 @@ export default function Deposit() {
 
   function toggleContactManager() {
     // setContactModal(!contactModal);
-    window.location.href = "https://t.me/Omarfxbtc"
+    window.location.href = "https://t.me/hassanisme"
   }
 
   async function contactManager(e) {
