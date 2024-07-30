@@ -101,7 +101,7 @@ export default function Deposit() {
 
   function toggleContactManager() {
     // setContactModal(!contactModal);
-    window.location.href = "https://t.me/hassanisme"
+    window.location.href = "https://t.me/hassanisme";
   }
 
   async function contactManager(e) {
@@ -137,13 +137,13 @@ export default function Deposit() {
       {loadingData && <LoadingData />}
 
       <div className="grid grid-cols-1 lg:grid-cols-2 mt-10 gap-4">
-        <OverviewCard
+        {/* <OverviewCard
           title={"Total Deposit"}
           content={`USD. ${transactions?.total}`}
           icon={balanceIcon}
           sub={``}
           subColor={``}
-        />
+        /> */}
         <OverviewCard
           title={"Click to contact manager"}
           content={`Deposit`}
@@ -175,9 +175,9 @@ export default function Deposit() {
               <th scope="col" className="px-6 py-3">
                 Date
               </th>
-              <th scope="col" className="px-6 py-3">
+              {/* <th scope="col" className="px-6 py-3">
                 Status
-              </th>
+              </th> */}
             </tr>
           </thead>
           <tbody>
@@ -197,7 +197,7 @@ export default function Deposit() {
                 <td className="px-6 py-4">
                   {moment(item.createdAt).format("lll")}
                 </td>
-                <td
+                {/* <td
                   className={`px-6 py-4 font-bold ${item.status === 0
                     ? "text-red-700"
                     : item.status === 1
@@ -210,7 +210,7 @@ export default function Deposit() {
                     : item.status === 1
                       ? "Complete"
                       : "Pending"}
-                </td>
+                </td> */}
               </tr>
             ))}
           </tbody>

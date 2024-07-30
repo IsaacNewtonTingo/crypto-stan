@@ -92,6 +92,8 @@ export default function Users() {
 
   function toggleEditModal(item) {
     setModal(!modal);
+    setActiveItem(item);
+    setBalance(item.accountBalance);
   }
 
   async function updateBalance(e) {
@@ -111,12 +113,13 @@ export default function Users() {
         getUsers();
         setActiveItem(null);
         setDropdown(false);
-        setBalance("")
+        setBalance("");
       } else {
         toast.error(response.data.message);
       }
       setProcessing(false);
     } catch (error) {
+      console.log(error);
       setProcessing(false);
       toast.error("An error occured while updating balance");
     }
@@ -144,8 +147,9 @@ export default function Users() {
           content={`${totalUsers.total}`}
           icon={usersIcon}
           sub={``}
-          subColor={`${totalUsers.difference > 0 ? "text-green-400" : "text-red-400"
-            }`}
+          subColor={`${
+            totalUsers.difference > 0 ? "text-green-400" : "text-red-400"
+          }`}
         />
 
         <OverviewCard

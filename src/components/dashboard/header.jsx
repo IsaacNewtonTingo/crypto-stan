@@ -5,11 +5,12 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import secureLocalStorage from "react-secure-storage";
 
 export default function Header() {
-  const { userData, setUserData, notifOpen, setNotifOpen } = useContext(AppContext);
+  const { userData, setUserData, notifOpen, setNotifOpen } =
+    useContext(AppContext);
 
   const [open, setopen] = useState(false);
-  const location = useLocation()
-  const navigate = useNavigate()
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const navItems = [
     {
@@ -87,20 +88,20 @@ export default function Header() {
         </svg>
       ),
     },
-    {
-      title: "My Plan",
-      navTo: "/dashboard/my-plan",
-      icon: (
-        <svg
-          viewBox="0 0 1024 1024"
-          fill="currentColor"
-          height="1em"
-          width="1em"
-        >
-          <path d="M668.6 320c0-4.4-3.6-8-8-8h-54.5c-3 0-5.8 1.7-7.1 4.4l-84.7 168.8H511l-84.7-168.8a8 8 0 00-7.1-4.4h-55.7c-1.3 0-2.6.3-3.8 1-3.9 2.1-5.3 7-3.2 10.8l103.9 191.6h-57c-4.4 0-8 3.6-8 8v27.1c0 4.4 3.6 8 8 8h76v39h-76c-4.4 0-8 3.6-8 8v27.1c0 4.4 3.6 8 8 8h76V704c0 4.4 3.6 8 8 8h49.9c4.4 0 8-3.6 8-8v-63.5h76.3c4.4 0 8-3.6 8-8v-27.1c0-4.4-3.6-8-8-8h-76.3v-39h76.3c4.4 0 8-3.6 8-8v-27.1c0-4.4-3.6-8-8-8H564l103.7-191.6c.5-1.1.9-2.4.9-3.7zM157.9 504.2a352.7 352.7 0 01103.5-242.4c32.5-32.5 70.3-58.1 112.4-75.9 43.6-18.4 89.9-27.8 137.6-27.8 47.8 0 94.1 9.3 137.6 27.8 42.1 17.8 79.9 43.4 112.4 75.9 10 10 19.3 20.5 27.9 31.4l-50 39.1a8 8 0 003 14.1l156.8 38.3c5 1.2 9.9-2.6 9.9-7.7l.8-161.5c0-6.7-7.7-10.5-12.9-6.3l-47.8 37.4C770.7 146.3 648.6 82 511.5 82 277 82 86.3 270.1 82 503.8a8 8 0 008 8.2h60c4.3 0 7.8-3.5 7.9-7.8zM934 512h-60c-4.3 0-7.9 3.5-8 7.8a352.7 352.7 0 01-103.5 242.4 352.57 352.57 0 01-112.4 75.9c-43.6 18.4-89.9 27.8-137.6 27.8s-94.1-9.3-137.6-27.8a352.57 352.57 0 01-112.4-75.9c-10-10-19.3-20.5-27.9-31.4l49.9-39.1a8 8 0 00-3-14.1l-156.8-38.3c-5-1.2-9.9 2.6-9.9 7.7l-.8 161.7c0 6.7 7.7 10.5 12.9 6.3l47.8-37.4C253.3 877.7 375.4 942 512.5 942 747 942 937.7 753.9 942 520.2a8 8 0 00-8-8.2z" />
-        </svg>
-      ),
-    },
+    // {
+    //   title: "My Plan",
+    //   navTo: "/dashboard/my-plan",
+    //   icon: (
+    //     <svg
+    //       viewBox="0 0 1024 1024"
+    //       fill="currentColor"
+    //       height="1em"
+    //       width="1em"
+    //     >
+    //       <path d="M668.6 320c0-4.4-3.6-8-8-8h-54.5c-3 0-5.8 1.7-7.1 4.4l-84.7 168.8H511l-84.7-168.8a8 8 0 00-7.1-4.4h-55.7c-1.3 0-2.6.3-3.8 1-3.9 2.1-5.3 7-3.2 10.8l103.9 191.6h-57c-4.4 0-8 3.6-8 8v27.1c0 4.4 3.6 8 8 8h76v39h-76c-4.4 0-8 3.6-8 8v27.1c0 4.4 3.6 8 8 8h76V704c0 4.4 3.6 8 8 8h49.9c4.4 0 8-3.6 8-8v-63.5h76.3c4.4 0 8-3.6 8-8v-27.1c0-4.4-3.6-8-8-8h-76.3v-39h76.3c4.4 0 8-3.6 8-8v-27.1c0-4.4-3.6-8-8-8H564l103.7-191.6c.5-1.1.9-2.4.9-3.7zM157.9 504.2a352.7 352.7 0 01103.5-242.4c32.5-32.5 70.3-58.1 112.4-75.9 43.6-18.4 89.9-27.8 137.6-27.8 47.8 0 94.1 9.3 137.6 27.8 42.1 17.8 79.9 43.4 112.4 75.9 10 10 19.3 20.5 27.9 31.4l-50 39.1a8 8 0 003 14.1l156.8 38.3c5 1.2 9.9-2.6 9.9-7.7l.8-161.5c0-6.7-7.7-10.5-12.9-6.3l-47.8 37.4C770.7 146.3 648.6 82 511.5 82 277 82 86.3 270.1 82 503.8a8 8 0 008 8.2h60c4.3 0 7.8-3.5 7.9-7.8zM934 512h-60c-4.3 0-7.9 3.5-8 7.8a352.7 352.7 0 01-103.5 242.4 352.57 352.57 0 01-112.4 75.9c-43.6 18.4-89.9 27.8-137.6 27.8s-94.1-9.3-137.6-27.8a352.57 352.57 0 01-112.4-75.9c-10-10-19.3-20.5-27.9-31.4l49.9-39.1a8 8 0 00-3-14.1l-156.8-38.3c-5-1.2-9.9 2.6-9.9 7.7l-.8 161.7c0 6.7 7.7 10.5 12.9 6.3l47.8-37.4C253.3 877.7 375.4 942 512.5 942 747 942 937.7 753.9 942 520.2a8 8 0 00-8-8.2z" />
+    //     </svg>
+    //   ),
+    // },
     // {
     //   title: "Referral",
     //   navTo: "/dashboard/referrals",
@@ -124,7 +125,7 @@ export default function Header() {
 
   return (
     <div className="h-[80px] w-full lg:w-[75%] bg-gradient-to-r from-gray-900 to-primary-900 shadow-lg fixed right-0 flex items-center justify-between px-6 lg:px-10 z-50 gap-10">
-      <div className="w-ful lg:w-[25%] flex gap-2 items-center">
+      <div className="w-full lg:w-[25%] flex gap-2 items-center">
         <svg
           viewBox="0 0 512 512"
           fill="currentColor"
@@ -136,101 +137,95 @@ export default function Header() {
         <div className="">
           <p className="text-gray-400">Balance</p>
           <p className="text-green-400 font-black">
-            USD. {userData.accountBalance}
+            USD. {userData?.accountBalance}
           </p>
         </div>
       </div>
 
+      {open ? (
+        <>
+          <svg
+            onClick={toggleMenu}
+            fill="none"
+            viewBox="0 0 24 24"
+            height="1em"
+            width="1em"
+            className="text-[40px] lmd:block text-white lg:hidden"
+          >
+            <path
+              fill="currentColor"
+              d="M6.225 4.811a1 1 0 00-1.414 1.414L10.586 12 4.81 17.775a1 1 0 101.414 1.414L12 13.414l5.775 5.775a1 1 0 001.414-1.414L13.414 12l5.775-5.775a1 1 0 00-1.414-1.414L12 10.586 6.225 4.81z"
+            />
+          </svg>
 
-      {
-        open ? (
-          <>
-            <svg
-              onClick={toggleMenu}
-              fill="none"
-              viewBox="0 0 24 24"
-              height="1em"
-              width="1em"
-              className="text-[40px] lmd:block text-white lg:hidden"
-            >
-              <path
-                fill="currentColor"
-                d="M6.225 4.811a1 1 0 00-1.414 1.414L10.586 12 4.81 17.775a1 1 0 101.414 1.414L12 13.414l5.775 5.775a1 1 0 001.414-1.414L13.414 12l5.775-5.775a1 1 0 00-1.414-1.414L12 10.586 6.225 4.81z"
-              />
-            </svg>
+          <div className="fixed top-[80px] left-0 right-0 z-80 w-full bg-[rgba(0,0,0,0.6)] h-screen flex justify-center">
+            <div className="w-full p-6 gap-4 bg-gray-100 h-screen">
+              <div className="flex flex-col gap-6">
+                {navItems.map((item) => {
+                  const isActive = location.pathname === item.navTo;
+                  const linkStyles = isActive
+                    ? "underline font-black text-myDark"
+                    : "text-gray-700 font-semibold hover:font-bold transition-font ";
 
-            <div className="fixed top-[80px] left-0 right-0 z-80 w-full bg-[rgba(0,0,0,0.6)] h-screen flex justify-center">
-              <div className="w-full p-6 gap-4 bg-gray-100 h-screen">
-                <div className="flex flex-col gap-6">
-                  {navItems.map((item) => {
-                    const isActive = location.pathname === item.navTo;
-                    const linkStyles = isActive
-                      ? "underline font-black text-myDark"
-                      : "text-gray-700 font-semibold hover:font-bold transition-font ";
+                  return (
+                    <div key={item.title}>
+                      <Link
+                        to={item.navTo}
+                        className={`${linkStyles}`}
+                        onClick={() => {
+                          toggleMenu();
+                        }}
+                      >
+                        {item.title}
+                      </Link>
+                    </div>
+                  );
+                })}
 
-                    return (
-                      <div key={item.title}>
-                        <Link
-                          to={item.navTo}
-                          className={`${linkStyles}`}
-                          onClick={() => {
-                            toggleMenu();
-                          }}
-                        >
-                          {item.title}
-                        </Link>
-                      </div>
-                    );
-                  })}
-
-                  <p
-
-                    className={`text-gray-700 font-semibold hover:font-bold transition-font`}
-                    onClick={() => {
-                      logout();
-                    }}
-                  >
-                    Logout
-                  </p>
-                </div>
+                <p
+                  className={`text-gray-700 font-semibold hover:font-bold transition-font`}
+                  onClick={() => {
+                    logout();
+                  }}
+                >
+                  Logout
+                </p>
               </div>
             </div>
-          </>
-        ) : (
-
-          <div className="w-full lg:w-[75%] flex items-center justify-end gap-2">
-            <svg
-              onClick={() => setNotifOpen(!notifOpen)}
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              className="w-[40px] text-gray-100 cursor-pointer"
-            >
-              <path d="M6 8v7h8V8a4 4 0 10-8 0zm2.03-5.67a2 2 0 113.95 0A6 6 0 0116 8v6l3 2v1H1v-1l3-2V8a6 6 0 014.03-5.67zM12 18a2 2 0 11-4 0h4z" />
-            </svg>
-
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAd5avdba8EiOZH8lmV3XshrXx7dKRZvhx-A&s"
-              alt="hiits and curves admin profile"
-              className="w-[40px] h-[40px] hidden lg:block rounded-[40px] border-2 border-myBlack cursor-pointer"
-            />
-
-            <svg
-              onClick={toggleMenu}
-              fill="none"
-              viewBox="0 0 24 24"
-              height="1em"
-              width="1em"
-              className="text-[40px] text-white lmd:block lg:hidden"
-            >
-              <path
-                fill="currentColor"
-                d="M4 6a1 1 0 011-1h14a1 1 0 110 2H5a1 1 0 01-1-1zM4 18a1 1 0 011-1h14a1 1 0 110 2H5a1 1 0 01-1-1zM11 11a1 1 0 100 2h8a1 1 0 100-2h-8z"
-              />
-            </svg>
           </div>
-        )
-      }
+        </>
+      ) : (
+        <div className="w-full lg:w-[75%] flex items-center justify-end gap-2">
+          <svg
+            onClick={() => setNotifOpen(!notifOpen)}
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            className="w-[40px] text-gray-100 cursor-pointer"
+          >
+            <path d="M6 8v7h8V8a4 4 0 10-8 0zm2.03-5.67a2 2 0 113.95 0A6 6 0 0116 8v6l3 2v1H1v-1l3-2V8a6 6 0 014.03-5.67zM12 18a2 2 0 11-4 0h4z" />
+          </svg>
 
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAd5avdba8EiOZH8lmV3XshrXx7dKRZvhx-A&s"
+            alt="hiits and curves admin profile"
+            className="w-[40px] h-[40px] hidden lg:block rounded-[40px] border-2 border-myBlack cursor-pointer"
+          />
+
+          <svg
+            onClick={toggleMenu}
+            fill="none"
+            viewBox="0 0 24 24"
+            height="1em"
+            width="1em"
+            className="text-[40px] text-white lmd:block lg:hidden"
+          >
+            <path
+              fill="currentColor"
+              d="M4 6a1 1 0 011-1h14a1 1 0 110 2H5a1 1 0 01-1-1zM4 18a1 1 0 011-1h14a1 1 0 110 2H5a1 1 0 01-1-1zM11 11a1 1 0 100 2h8a1 1 0 100-2h-8z"
+            />
+          </svg>
+        </div>
+      )}
 
       {notifOpen && <NotifModal />}
     </div>

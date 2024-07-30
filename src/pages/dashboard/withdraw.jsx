@@ -8,9 +8,10 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import WithdrawalModal from "../../components/dashboard/withdrawal-modal";
 import LoadingData from "../../components/loading-data";
+import secureLocalStorage from "react-secure-storage";
 
 export default function Withdraw() {
-  const { userData } = useContext(AppContext);
+  const { userData, setUserData } = useContext(AppContext);
   const [transactions, setTransactions] = useState(null);
   const [withdrawalModal, setWithdrawalModal] = useState(false);
   const [amount, setAmount] = useState("");
@@ -102,6 +103,32 @@ export default function Withdraw() {
   function toggleWithdrawalModal() {
     setWithdrawalModal(!withdrawalModal);
   }
+
+  async function withdraw(e) {
+    e.preventDefault();
+    try {
+      setProcessing(true);
+      const url = `${process.env.REACT_APP_API_ENDPOINT}/api/transactions/withdraw`;
+      const data = {
+        amount,
+        userID: userData._id,
+      };
+      const response = await axios.post(url, data);
+      if (response.data.status === "Success") {
+        toggleWithdrawalModal();
+        setUserData(response.data.data);
+        secureLocalStorage.setItem("userData", response.data.data);
+        getTransactions();
+      } else {
+        toast.error(response.data.message);
+      }
+      setProcessing(false);
+    } catch (error) {
+      setProcessing(false);
+
+      toast.error("An error occured while withdrawing");
+    }
+  }
   return (
     <div>
       {loadingData && <LoadingData />}
@@ -110,13 +137,13 @@ export default function Withdraw() {
       <h2 className="text-gray-500">Have a look at your withdrawal records</h2>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 mt-10 gap-4">
-        <OverviewCard
+        {/* <OverviewCard
           title={"Total Withdrawal"}
           content={`USD. ${transactions?.total}`}
           icon={balanceIcon}
           sub={``}
           subColor={``}
-        />
+        /> */}
         <OverviewCard
           title={"Make a withdrawal"}
           content={`Withdraw`}
@@ -148,9 +175,9 @@ export default function Withdraw() {
               <th scope="col" className="px-6 py-3">
                 Date
               </th>
-              <th scope="col" className="px-6 py-3">
+              {/* <th scope="col" className="px-6 py-3">
                 Status
-              </th>
+              </th> */}
             </tr>
           </thead>
           <tbody>
@@ -170,7 +197,7 @@ export default function Withdraw() {
                 <td className="px-6 py-4">
                   {moment(item.createdAt).format("lll")}
                 </td>
-                <td
+                {/* <td
                   className={`px-6 py-4 font-bold ${
                     item.status === 0
                       ? "text-red-700"
@@ -184,7 +211,7 @@ export default function Withdraw() {
                     : item.status === 1
                     ? "Complete"
                     : "Pending"}
-                </td>
+                </td> */}
               </tr>
             ))}
           </tbody>
@@ -197,6 +224,7 @@ export default function Withdraw() {
           amount={amount}
           setAmount={setAmount}
           toggleWithdrawalModal={toggleWithdrawalModal}
+          withdraw={withdraw}
         />
       )}
     </div>

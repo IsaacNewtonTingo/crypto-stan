@@ -84,7 +84,7 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-2 mt-10 gap-4">
         <OverviewCard
           title={"Total Balance"}
-          content={`USD. ${userData.accountBalance}`}
+          content={`USD. ${userData?.accountBalance}`}
           icon={balanceIcon}
           sub={``}
           subColor={``}
@@ -116,9 +116,9 @@ export default function Dashboard() {
               <th scope="col" className="px-6 py-3">
                 Date
               </th>
-              <th scope="col" className="px-6 py-3">
+              {/* <th scope="col" className="px-6 py-3">
                 Status
-              </th>
+              </th> */}
             </tr>
           </thead>
           <tbody>
@@ -138,7 +138,7 @@ export default function Dashboard() {
                 <td className="px-6 py-4">
                   {moment(item.createdAt).format("lll")}
                 </td>
-                <td
+                {/* <td
                   className={`px-6 py-4 font-bold ${
                     item.status == 0
                       ? "text-red-500"
@@ -152,7 +152,7 @@ export default function Dashboard() {
                     : item.status == 1
                     ? "Complete"
                     : "Pending"}
-                </td>
+                </td> */}
               </tr>
             ))}
           </tbody>
