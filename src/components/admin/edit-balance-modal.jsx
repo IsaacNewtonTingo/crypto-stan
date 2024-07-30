@@ -14,7 +14,7 @@ export default function EditBalanceModal({
   user,
 }) {
   return (
-    <div className="fixed left-0 right-0 z-50 flex items-center justify-center w-full bg-[rgba(0,0,0,0.9)] md:inset-0 h-screen">
+    <div className="fixed top-0 left-0 right-0 z-50 flex items-center justify-center w-full bg-[rgba(0,0,0,0.9)] md:inset-0 h-screen">
       <div className="w-[90%] md:w-[40%] bg-gray-50 rounded-lg p-6 gap-4">
         <div className="flex items-center justify-between">
           <h2 className="text-[20px] font-bold text-gray-900">
