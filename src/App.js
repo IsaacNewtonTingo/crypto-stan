@@ -66,10 +66,10 @@ function App() {
       path: "about-us",
       element: <AboutUs />,
     },
-    {
-      path: "plans",
-      element: <Plans />,
-    },
+    // {
+    //   path: "plans",
+    //   element: <Plans />,
+    // },
     {
       path: "contact-us",
       element: <ContactUs />,
@@ -94,10 +94,10 @@ function App() {
           path: "referrals",
           element: <Referrals />,
         },
-        {
-          path: "my-plan",
-          element: <MyPlan />,
-        },
+        // {
+        //   path: "my-plan",
+        //   element: <MyPlan />,
+        // },
       ],
     },
     {

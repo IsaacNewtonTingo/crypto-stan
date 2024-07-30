@@ -26,10 +26,10 @@ export default function Header() {
       name: "About Us",
       navTo: "/about-us",
     },
-    {
-      name: "Plans",
-      navTo: "/plans",
-    },
+    // {
+    //   name: "Plans",
+    //   navTo: "/plans",
+    // },
     {
       name: "FAQs",
       navTo: "/faqs",

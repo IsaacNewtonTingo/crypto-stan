@@ -145,11 +145,11 @@ export default function Home() {
   ];
 
   const [packages, setPackages] = useState([]);
-  const [loadingData, setLoadingData] = useState(true);
+  const [loadingData, setLoadingData] = useState(false);
 
   const navigate = useNavigate();
   useEffect(() => {
-    getPlans();
+    // getPlans();
   }, []);
 
   async function getPlans() {
@@ -269,8 +269,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div
-        // style={{ backgroundImage: "url('/bg2.png')" }}
+      {/* <div
         className="px-10 lg:px-40 py-10"
       >
         <p className="text-primary-500 text-center font-bold">Packages</p>
@@ -287,7 +286,7 @@ export default function Home() {
             <PlanCard item={item} key={item._id} />
           ))}
         </div>
-      </div>
+      </div> */}
     </AppLayout>
   );
 }
